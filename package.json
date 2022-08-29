@@ -1,0 +1,14 @@
+{
+    "name": "com.devtodev.sdk.analytics",
+    "displayName": "DevToDev Analytics",
+    "version": "3.3.0",
+    "unity": "2018.3",
+    "description": "DevToDev analytics module",
+    "documentationUrl": "https://docs.devtodev.com/integration/integration-of-sdk-v2/sdk-integration/unity",
+    "keywords": [
+        "analytics"
+    ],
+    "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+    }
+}
