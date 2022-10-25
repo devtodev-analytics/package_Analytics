@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
-// swift-module-flags: -target i386-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name iOSUnity
+// swift-module-flags: -target i386-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name iOSUnity
 import AdSupport
 import CryptoKit
 import Dispatch
@@ -15,7 +15,7 @@ import os
 @_inheritsConvenienceInitializers @objc public class DTDEngineWrapper : ObjectiveC.NSObject {
   @objc public static var engineLoggerMessageClosure: ((iOSUnity.DTDLogLevel, Swift.String) -> Swift.Void)? {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static func destroySDK()
   @objc public static func setSDKVersion(version: Swift.String)
@@ -32,11 +32,11 @@ import os
 @_inheritsConvenienceInitializers @objc public class DTDReferralProperty : ObjectiveC.NSObject, Foundation.NSCopying {
   @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
   @objc public init(name: Swift.String)
-  @objc public static var source: iOSUnity.DTDReferralProperty
-  @objc public static var campaign: iOSUnity.DTDReferralProperty
-  @objc public static var content: iOSUnity.DTDReferralProperty
-  @objc public static var medium: iOSUnity.DTDReferralProperty
-  @objc public static var term: iOSUnity.DTDReferralProperty
+  @objc public static let source: iOSUnity.DTDReferralProperty
+  @objc public static let campaign: iOSUnity.DTDReferralProperty
+  @objc public static let content: iOSUnity.DTDReferralProperty
+  @objc public static let medium: iOSUnity.DTDReferralProperty
+  @objc public static let term: iOSUnity.DTDReferralProperty
   @objc final public let name: Swift.String
   @available(*, unavailable)
   @objc override dynamic public init()
@@ -158,15 +158,15 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
   @objc override dynamic public init()
   @objc public static var remoteConfigWaiting: Swift.Double {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static var groupDefinitionWaiting: Swift.Double {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static var defaults: [Swift.String : Any] {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static var config: iOSUnity.DTDRemoteConfigCollection {
     @objc get
@@ -229,10 +229,10 @@ extension DTDAccrualType : Swift.CustomStringConvertible {
   public typealias ConfigCollection = [Swift.String : iOSUnity.DTDRemoteConfigValue]
   @objc final public subscript(key: Swift.String) -> iOSUnity.DTDRemoteConfigValue {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 extension DTDRemoteConfigCollection {
   @objc final public func getRawConfig() -> [Swift.String : iOSUnity.DTDRemoteConfigValue]
@@ -248,10 +248,10 @@ extension DTDRemoteConfigCollection {
     get
   }
   public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
+  public init?(rawValue: Swift.Int)
   public typealias AllCases = [iOSUnity.DTDLogLevel]
   public static var allCases: [iOSUnity.DTDLogLevel] {
     get
@@ -289,27 +289,27 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
   @objc optional func didReceiveDevtodevId(with devtodevId: Swift.Int64)
 }
 @objc public protocol DTDRemoteConfigListener {
-  @objc func onReceived(result: iOSUnity.DTDRemoteConfigReceiveResult)
+  @objc(onReceivedResult:) func onReceived(result: iOSUnity.DTDRemoteConfigReceiveResult)
   @objc func onPrepareToChange()
-  @objc func onChanged(result: iOSUnity.DTDRemoteConfigChangeResult, error: Swift.Error?)
+  @objc(onChangedResult:error:) func onChanged(result: iOSUnity.DTDRemoteConfigChangeResult, error: Swift.Error?)
 }
 @objc public class DTDSocialNetwork : ObjectiveC.NSObject {
   @objc public init(name: Swift.String)
   @objc final public let name: Swift.String
-  @objc public static var facebook: iOSUnity.DTDSocialNetwork
-  @objc public static var vkontakte: iOSUnity.DTDSocialNetwork
-  @objc public static var twitter: iOSUnity.DTDSocialNetwork
-  @objc public static var googleplus: iOSUnity.DTDSocialNetwork
-  @objc public static var whatsapp: iOSUnity.DTDSocialNetwork
-  @objc public static var viber: iOSUnity.DTDSocialNetwork
-  @objc public static var evernote: iOSUnity.DTDSocialNetwork
-  @objc public static var googlemail: iOSUnity.DTDSocialNetwork
-  @objc public static var linkedin: iOSUnity.DTDSocialNetwork
-  @objc public static var pinterest: iOSUnity.DTDSocialNetwork
-  @objc public static var qzone: iOSUnity.DTDSocialNetwork
-  @objc public static var reddit: iOSUnity.DTDSocialNetwork
-  @objc public static var renren: iOSUnity.DTDSocialNetwork
-  @objc public static var tumblr: iOSUnity.DTDSocialNetwork
+  @objc public static let facebook: iOSUnity.DTDSocialNetwork
+  @objc public static let vkontakte: iOSUnity.DTDSocialNetwork
+  @objc public static let twitter: iOSUnity.DTDSocialNetwork
+  @objc public static let googleplus: iOSUnity.DTDSocialNetwork
+  @objc public static let whatsapp: iOSUnity.DTDSocialNetwork
+  @objc public static let viber: iOSUnity.DTDSocialNetwork
+  @objc public static let evernote: iOSUnity.DTDSocialNetwork
+  @objc public static let googlemail: iOSUnity.DTDSocialNetwork
+  @objc public static let linkedin: iOSUnity.DTDSocialNetwork
+  @objc public static let pinterest: iOSUnity.DTDSocialNetwork
+  @objc public static let qzone: iOSUnity.DTDSocialNetwork
+  @objc public static let reddit: iOSUnity.DTDSocialNetwork
+  @objc public static let renren: iOSUnity.DTDSocialNetwork
+  @objc public static let tumblr: iOSUnity.DTDSocialNetwork
   @objc deinit
   @objc override dynamic public init()
 }
@@ -352,7 +352,7 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
   @objc override dynamic public init()
   @objc public static var logLevel: iOSUnity.DTDLogLevel {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc(deviceIdHandler:) public static func getDeviceId(completionHandler: @escaping (Swift.String) -> Swift.Void)
   @objc(sdkVersionHandler:) public static func getSDKVersion(completionHandler: @escaping (Swift.String) -> Swift.Void)
@@ -400,10 +400,34 @@ extension DTDAnalytics {
   @objc public static func getTestCustomUrl(urlHandler: @escaping (Swift.String) -> Swift.Void)
   @objc public static var loggerMessageClosure: ((Swift.String) -> Swift.Void)? {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static var sdkFolderPath: Swift.String {
     @objc get
   }
   @objc public static func clearKeychain()
 }
+extension iOSUnity.DTDReceiptStatus : Swift.Equatable {}
+extension iOSUnity.DTDReceiptStatus : Swift.Hashable {}
+extension iOSUnity.DTDReceiptStatus : Swift.RawRepresentable {}
+extension iOSUnity.DTDTrackingStatus : Swift.Equatable {}
+extension iOSUnity.DTDTrackingStatus : Swift.Hashable {}
+extension iOSUnity.DTDTrackingStatus : Swift.RawRepresentable {}
+extension iOSUnity.DTDRemoteConfigSource : Swift.Equatable {}
+extension iOSUnity.DTDRemoteConfigSource : Swift.Hashable {}
+extension iOSUnity.DTDRemoteConfigSource : Swift.RawRepresentable {}
+extension iOSUnity.DTDGender : Swift.Equatable {}
+extension iOSUnity.DTDGender : Swift.Hashable {}
+extension iOSUnity.DTDGender : Swift.RawRepresentable {}
+extension iOSUnity.DTDAccrualType : Swift.Equatable {}
+extension iOSUnity.DTDAccrualType : Swift.Hashable {}
+extension iOSUnity.DTDAccrualType : Swift.RawRepresentable {}
+extension iOSUnity.DTDLogLevel : Swift.Equatable {}
+extension iOSUnity.DTDLogLevel : Swift.Hashable {}
+extension iOSUnity.DTDLogLevel : Swift.RawRepresentable {}
+extension iOSUnity.DTDRemoteConfigChangeResult : Swift.Equatable {}
+extension iOSUnity.DTDRemoteConfigChangeResult : Swift.Hashable {}
+extension iOSUnity.DTDRemoteConfigChangeResult : Swift.RawRepresentable {}
+extension iOSUnity.DTDRemoteConfigReceiveResult : Swift.Equatable {}
+extension iOSUnity.DTDRemoteConfigReceiveResult : Swift.Hashable {}
+extension iOSUnity.DTDRemoteConfigReceiveResult : Swift.RawRepresentable {}

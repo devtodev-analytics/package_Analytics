@@ -32,7 +32,7 @@ namespace DevToDev.Editor.WSA
                     PlayerSettings.productName,
                     PlayerSettings.productName + PROJECT_FILE_EXTENSION);
                 var doc = XDocument.Load(pathToProjectFile);
-                const string ns = "http://schemas.microsoft.com/developer/msbuild/2003";
+                XNamespace ns = "http://schemas.microsoft.com/developer/msbuild/2003";
                 var projectElement = doc.Descendants(ns + "Project").First();
                 var itemGroup = new XElement(ns + "ItemGroup");
                 var reference = new XElement(ns + "Reference");

@@ -672,7 +672,7 @@ SWIFT_PROTOCOL("_TtP8iOSUnity23DTDRemoteConfigListener_")
 ///     result: The result of receiving the configuration
 ///   </li>
 /// </ul>
-- (void)onReceivedWithResult:(enum DTDRemoteConfigReceiveResult)result;
+- (void)onReceivedResult:(enum DTDRemoteConfigReceiveResult)result;
 /// The method is called when the configuration might change
 - (void)onPrepareToChange;
 /// The method is called when there was a change in the remote configuration
@@ -680,7 +680,7 @@ SWIFT_PROTOCOL("_TtP8iOSUnity23DTDRemoteConfigListener_")
 ///
 /// \param error Informing error
 ///
-- (void)onChangedWithResult:(enum DTDRemoteConfigChangeResult)result error:(NSError * _Nullable)error;
+- (void)onChangedResult:(enum DTDRemoteConfigChangeResult)result error:(NSError * _Nullable)error;
 @end
 
 typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigReceiveResult, open) {
@@ -1565,7 +1565,7 @@ SWIFT_PROTOCOL("_TtP8iOSUnity23DTDRemoteConfigListener_")
 ///     result: The result of receiving the configuration
 ///   </li>
 /// </ul>
-- (void)onReceivedWithResult:(enum DTDRemoteConfigReceiveResult)result;
+- (void)onReceivedResult:(enum DTDRemoteConfigReceiveResult)result;
 /// The method is called when the configuration might change
 - (void)onPrepareToChange;
 /// The method is called when there was a change in the remote configuration
@@ -1573,7 +1573,7 @@ SWIFT_PROTOCOL("_TtP8iOSUnity23DTDRemoteConfigListener_")
 ///
 /// \param error Informing error
 ///
-- (void)onChangedWithResult:(enum DTDRemoteConfigChangeResult)result error:(NSError * _Nullable)error;
+- (void)onChangedResult:(enum DTDRemoteConfigChangeResult)result error:(NSError * _Nullable)error;
 @end
 
 typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigReceiveResult, open) {

@@ -15,7 +15,7 @@ import os
 @_inheritsConvenienceInitializers @objc public class DTDEngineWrapper : ObjectiveC.NSObject {
   @objc public static var engineLoggerMessageClosure: ((MacOSUnity.DTDLogLevel, Swift.String) -> Swift.Void)? {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static func destroySDK()
   @objc public static func setSDKVersion(version: Swift.String)
@@ -78,7 +78,7 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
   public typealias ConfigCollection = [Swift.String : MacOSUnity.DTDRemoteConfigValue]
   @objc final public subscript(key: Swift.String) -> MacOSUnity.DTDRemoteConfigValue {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc deinit
   @objc override dynamic public init()
@@ -90,15 +90,15 @@ extension DTDRemoteConfigCollection {
   @objc override dynamic public init()
   @objc public static var remoteConfigWaiting: Swift.Double {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static var groupDefinitionWaiting: Swift.Double {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static var defaults: [Swift.String : Any] {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static var config: MacOSUnity.DTDRemoteConfigCollection {
     @objc get
@@ -136,15 +136,15 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
   }
 }
 @objc public protocol DTDRemoteConfigListener {
-  @objc func onReceived(result: MacOSUnity.DTDRemoteConfigReceiveResult)
+  @objc(onReceivedResult:) func onReceived(result: MacOSUnity.DTDRemoteConfigReceiveResult)
   @objc func onPrepareToChange()
-  @objc func onChanged(result: MacOSUnity.DTDRemoteConfigChangeResult, error: Swift.Error?)
+  @objc(onChangedResult:error:) func onChanged(result: MacOSUnity.DTDRemoteConfigChangeResult, error: Swift.Error?)
 }
 @_inheritsConvenienceInitializers @objc public class DTDAnalytics : ObjectiveC.NSObject {
   @objc override dynamic public init()
   @objc public static var logLevel: MacOSUnity.DTDLogLevel {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc(deviceIdHandler:) public static func getDeviceId(completionHandler: @escaping (Swift.String) -> Swift.Void)
   @objc(sdkVersionHandler:) public static func getSDKVersion(completionHandler: @escaping (Swift.String) -> Swift.Void)
@@ -192,7 +192,7 @@ extension DTDAnalytics {
   @objc public static func getTestCustomUrl(urlHandler: @escaping (Swift.String) -> Swift.Void)
   @objc public static var loggerMessageClosure: ((Swift.String) -> Swift.Void)? {
     @objc get
-    @objc set(newValue)
+    @objc set
   }
   @objc public static var sdkFolderPath: Swift.String {
     @objc get
@@ -201,11 +201,11 @@ extension DTDAnalytics {
 @_inheritsConvenienceInitializers @objc public class DTDReferralProperty : ObjectiveC.NSObject, Foundation.NSCopying {
   @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
   @objc public init(name: Swift.String)
-  @objc public static var source: MacOSUnity.DTDReferralProperty
-  @objc public static var campaign: MacOSUnity.DTDReferralProperty
-  @objc public static var content: MacOSUnity.DTDReferralProperty
-  @objc public static var medium: MacOSUnity.DTDReferralProperty
-  @objc public static var term: MacOSUnity.DTDReferralProperty
+  @objc public static let source: MacOSUnity.DTDReferralProperty
+  @objc public static let campaign: MacOSUnity.DTDReferralProperty
+  @objc public static let content: MacOSUnity.DTDReferralProperty
+  @objc public static let medium: MacOSUnity.DTDReferralProperty
+  @objc public static let term: MacOSUnity.DTDReferralProperty
   @objc final public let name: Swift.String
   @available(*, unavailable)
   @objc override dynamic public init()
@@ -264,20 +264,20 @@ extension DTDAnalytics {
 @objc public class DTDSocialNetwork : ObjectiveC.NSObject {
   @objc public init(name: Swift.String)
   @objc final public let name: Swift.String
-  @objc public static var facebook: MacOSUnity.DTDSocialNetwork
-  @objc public static var vkontakte: MacOSUnity.DTDSocialNetwork
-  @objc public static var twitter: MacOSUnity.DTDSocialNetwork
-  @objc public static var googleplus: MacOSUnity.DTDSocialNetwork
-  @objc public static var whatsapp: MacOSUnity.DTDSocialNetwork
-  @objc public static var viber: MacOSUnity.DTDSocialNetwork
-  @objc public static var evernote: MacOSUnity.DTDSocialNetwork
-  @objc public static var googlemail: MacOSUnity.DTDSocialNetwork
-  @objc public static var linkedin: MacOSUnity.DTDSocialNetwork
-  @objc public static var pinterest: MacOSUnity.DTDSocialNetwork
-  @objc public static var qzone: MacOSUnity.DTDSocialNetwork
-  @objc public static var reddit: MacOSUnity.DTDSocialNetwork
-  @objc public static var renren: MacOSUnity.DTDSocialNetwork
-  @objc public static var tumblr: MacOSUnity.DTDSocialNetwork
+  @objc public static let facebook: MacOSUnity.DTDSocialNetwork
+  @objc public static let vkontakte: MacOSUnity.DTDSocialNetwork
+  @objc public static let twitter: MacOSUnity.DTDSocialNetwork
+  @objc public static let googleplus: MacOSUnity.DTDSocialNetwork
+  @objc public static let whatsapp: MacOSUnity.DTDSocialNetwork
+  @objc public static let viber: MacOSUnity.DTDSocialNetwork
+  @objc public static let evernote: MacOSUnity.DTDSocialNetwork
+  @objc public static let googlemail: MacOSUnity.DTDSocialNetwork
+  @objc public static let linkedin: MacOSUnity.DTDSocialNetwork
+  @objc public static let pinterest: MacOSUnity.DTDSocialNetwork
+  @objc public static let qzone: MacOSUnity.DTDSocialNetwork
+  @objc public static let reddit: MacOSUnity.DTDSocialNetwork
+  @objc public static let renren: MacOSUnity.DTDSocialNetwork
+  @objc public static let tumblr: MacOSUnity.DTDSocialNetwork
   @objc deinit
   @objc override dynamic public init()
 }
@@ -300,10 +300,10 @@ extension DTDTrackingStatus : Swift.CustomStringConvertible {
   case earned = 0
   case bought = 1
   public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
+  public init?(rawValue: Swift.Int)
 }
 extension DTDAccrualType : Swift.CustomStringConvertible {
   public var description: Swift.String {
@@ -397,12 +397,36 @@ extension DTDAccrualType : Swift.CustomStringConvertible {
     get
   }
   public typealias RawValue = Swift.Int
-  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
+  public init?(rawValue: Swift.Int)
   public typealias AllCases = [MacOSUnity.DTDLogLevel]
   public static var allCases: [MacOSUnity.DTDLogLevel] {
     get
   }
 }
+extension MacOSUnity.DTDRemoteConfigSource : Swift.Equatable {}
+extension MacOSUnity.DTDRemoteConfigSource : Swift.Hashable {}
+extension MacOSUnity.DTDRemoteConfigSource : Swift.RawRepresentable {}
+extension MacOSUnity.DTDRemoteConfigChangeResult : Swift.Equatable {}
+extension MacOSUnity.DTDRemoteConfigChangeResult : Swift.Hashable {}
+extension MacOSUnity.DTDRemoteConfigChangeResult : Swift.RawRepresentable {}
+extension MacOSUnity.DTDRemoteConfigReceiveResult : Swift.Equatable {}
+extension MacOSUnity.DTDRemoteConfigReceiveResult : Swift.Hashable {}
+extension MacOSUnity.DTDRemoteConfigReceiveResult : Swift.RawRepresentable {}
+extension MacOSUnity.DTDGender : Swift.Equatable {}
+extension MacOSUnity.DTDGender : Swift.Hashable {}
+extension MacOSUnity.DTDGender : Swift.RawRepresentable {}
+extension MacOSUnity.DTDTrackingStatus : Swift.Equatable {}
+extension MacOSUnity.DTDTrackingStatus : Swift.Hashable {}
+extension MacOSUnity.DTDTrackingStatus : Swift.RawRepresentable {}
+extension MacOSUnity.DTDAccrualType : Swift.Equatable {}
+extension MacOSUnity.DTDAccrualType : Swift.Hashable {}
+extension MacOSUnity.DTDAccrualType : Swift.RawRepresentable {}
+extension MacOSUnity.DTDReceiptStatus : Swift.Equatable {}
+extension MacOSUnity.DTDReceiptStatus : Swift.Hashable {}
+extension MacOSUnity.DTDReceiptStatus : Swift.RawRepresentable {}
+extension MacOSUnity.DTDLogLevel : Swift.Equatable {}
+extension MacOSUnity.DTDLogLevel : Swift.Hashable {}
+extension MacOSUnity.DTDLogLevel : Swift.RawRepresentable {}
