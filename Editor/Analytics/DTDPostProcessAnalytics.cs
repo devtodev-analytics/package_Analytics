@@ -12,6 +12,7 @@ namespace Assets.DevToDev.Analytics.Editor
         private const string DEVICE = "ios-arm64_armv7";
         private const string SIMULATOR = "ios-arm64_i386_x86_64-simulator";
         private const string UNITY_ANALYTICS_NAME = "iOSUnity.framework";
+        private const string PACKAGE_NAME = "com.devtodev.sdk.analytics";
 
         [PostProcessBuild(98)]
         public static void OnPostProcessBuild(BuildTarget target, string pathToBuiltProject)
@@ -41,22 +42,30 @@ namespace Assets.DevToDev.Analytics.Editor
 #endif
             project.AddFrameworkToProject(targetGuid, "AdSupport.framework", true);
             project.AddFrameworkToProject(targetGuid, "AppTrackingTransparency.framework", true);
-            AddAnalyticsFramework(pathToBuiltProject, project, targetGuid,
-                PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK
-                    ? Path.Combine("Plugins", "DevToDev", "Analytics", "IOS", DEVICE)
-                    : Path.Combine("Plugins", "DevToDev", "Analytics", "IOS", SIMULATOR));
+            var frameworkAbsolutePath = PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK
+                ? Path.Combine("Plugins", "DevToDev", "Analytics", "IOS", DEVICE)
+                : Path.Combine("Plugins", "DevToDev", "Analytics", "IOS", SIMULATOR);
+            frameworkAbsolutePath = Path.Combine(Application.dataPath, frameworkAbsolutePath, UNITY_ANALYTICS_NAME);
+            
+            if (!Directory.Exists(frameworkAbsolutePath))
+            {
+                frameworkAbsolutePath = PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK
+                    ? Path.Combine("Packages", PACKAGE_NAME, "Plugins", "Analytics", "IOS", DEVICE)
+                    : Path.Combine("Packages", PACKAGE_NAME, "Plugins", "Analytics", "IOS", SIMULATOR);
+                frameworkAbsolutePath = Path.GetFullPath(Path.Combine(frameworkAbsolutePath, UNITY_ANALYTICS_NAME));
+            }
+            Debug.Log(frameworkAbsolutePath);
+            AddAnalyticsFramework(pathToBuiltProject, project, targetGuid, frameworkAbsolutePath);
             File.WriteAllText(projectPath, project.WriteToString());
         }
 
         private static void AddAnalyticsFramework(string projectPath, UnityEditor.iOS.Xcode.PBXProject project,
             string targetGuid,
-            string frameworkFolderName)
+            string frameworkPath)
         {
             var destinationFrameworkFilePath = Path.Combine(projectPath, "Frameworks", UNITY_ANALYTICS_NAME);
-            var editorFrameworkFilePath = Path.Combine(Application.dataPath,
-                frameworkFolderName, UNITY_ANALYTICS_NAME);
             // Copy framework
-            DirectoryCopy(editorFrameworkFilePath, destinationFrameworkFilePath, true);
+            DirectoryCopy(frameworkPath, destinationFrameworkFilePath, true);
 
             // Add declaration to .xcodeproj.
             var fileInBuild =

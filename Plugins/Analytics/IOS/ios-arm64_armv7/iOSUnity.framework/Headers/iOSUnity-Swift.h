@@ -251,8 +251,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (void)userIdHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
 /// Set delegate for receive devtodev identifiers
 + (void)setIdentifiersListenerWithListener:(id <DTDIdentifiersListener> _Nullable)listener;
-/// Set callback for notification about initialization finished
-+ (void)setInitializationCompleteCallback:(void (^ _Nullable)(void))callback;
 /// Set custom user identifier
 + (void)userId:(NSString * _Nonnull)userId;
 /// Replace custom user identifier
@@ -885,8 +883,6 @@ SWIFT_CLASS("_TtC8iOSUnity17DTDVerifyResponse")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
-
-
 
 
 
@@ -1148,8 +1144,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (void)userIdHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
 /// Set delegate for receive devtodev identifiers
 + (void)setIdentifiersListenerWithListener:(id <DTDIdentifiersListener> _Nullable)listener;
-/// Set callback for notification about initialization finished
-+ (void)setInitializationCompleteCallback:(void (^ _Nullable)(void))callback;
 /// Set custom user identifier
 + (void)userId:(NSString * _Nonnull)userId;
 /// Replace custom user identifier
@@ -1782,8 +1776,6 @@ SWIFT_CLASS("_TtC8iOSUnity17DTDVerifyResponse")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
-
-
 
 
 
