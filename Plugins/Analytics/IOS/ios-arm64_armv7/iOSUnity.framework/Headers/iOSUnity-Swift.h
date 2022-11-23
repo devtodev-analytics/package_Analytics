@@ -239,6 +239,8 @@ SWIFT_CLASS("_TtC8iOSUnity12DTDAnalytics")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (enum DTDLogLevel)logLevel SWIFT_WARN_UNUSED_RESULT;
 + (void)setLogLevel:(enum DTDLogLevel)newValue;
+/// Enable COPPA (Children’s Online Privacy Protection Act) compliant for the application.
++ (void)coppaControlEnable;
 /// Get current device identifier
 + (void)deviceIdHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
 /// Get current SDK version
@@ -251,6 +253,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (void)userIdHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
 /// Set delegate for receive devtodev identifiers
 + (void)setIdentifiersListenerWithListener:(id <DTDIdentifiersListener> _Nullable)listener;
+/// Set callback for notification about initialization finished
++ (void)setInitializationCompleteCallback:(void (^ _Nullable)(void))callback;
 /// Set custom user identifier
 + (void)userId:(NSString * _Nonnull)userId;
 /// Replace custom user identifier
@@ -630,6 +634,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DTDRemoteCon
 + (DTDRemoteConfigCollection * _Nonnull)config SWIFT_WARN_UNUSED_RESULT;
 /// Apply configuration change, run experiment
 + (void)applyConfig;
+/// A debug method for saving a test experiment after restarting the application
++ (void)cacheTestExperiment;
 /// Reset configuration, cancel experiment
 + (void)resetConfig;
 @end
@@ -647,6 +653,8 @@ typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigChangeResult, open) {
 /// Wrapper for remote parameters collection. Enables access to configuration values by using subscripting syntax.
 SWIFT_CLASS("_TtC8iOSUnity25DTDRemoteConfigCollection")
 @interface DTDRemoteConfigCollection : NSObject
+/// Check if current conguration have value for key
+- (BOOL)hasKey:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (DTDRemoteConfigValue * _Nonnull)objectForKeyedSubscript:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (void)setObject:(DTDRemoteConfigValue * _Nonnull)newValue forKeyedSubscript:(NSString * _Nonnull)key;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -883,6 +891,8 @@ SWIFT_CLASS("_TtC8iOSUnity17DTDVerifyResponse")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
+
+
 
 
 
@@ -1132,6 +1142,8 @@ SWIFT_CLASS("_TtC8iOSUnity12DTDAnalytics")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (enum DTDLogLevel)logLevel SWIFT_WARN_UNUSED_RESULT;
 + (void)setLogLevel:(enum DTDLogLevel)newValue;
+/// Enable COPPA (Children’s Online Privacy Protection Act) compliant for the application.
++ (void)coppaControlEnable;
 /// Get current device identifier
 + (void)deviceIdHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
 /// Get current SDK version
@@ -1144,6 +1156,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (void)userIdHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
 /// Set delegate for receive devtodev identifiers
 + (void)setIdentifiersListenerWithListener:(id <DTDIdentifiersListener> _Nullable)listener;
+/// Set callback for notification about initialization finished
++ (void)setInitializationCompleteCallback:(void (^ _Nullable)(void))callback;
 /// Set custom user identifier
 + (void)userId:(NSString * _Nonnull)userId;
 /// Replace custom user identifier
@@ -1523,6 +1537,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DTDRemoteCon
 + (DTDRemoteConfigCollection * _Nonnull)config SWIFT_WARN_UNUSED_RESULT;
 /// Apply configuration change, run experiment
 + (void)applyConfig;
+/// A debug method for saving a test experiment after restarting the application
++ (void)cacheTestExperiment;
 /// Reset configuration, cancel experiment
 + (void)resetConfig;
 @end
@@ -1540,6 +1556,8 @@ typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigChangeResult, open) {
 /// Wrapper for remote parameters collection. Enables access to configuration values by using subscripting syntax.
 SWIFT_CLASS("_TtC8iOSUnity25DTDRemoteConfigCollection")
 @interface DTDRemoteConfigCollection : NSObject
+/// Check if current conguration have value for key
+- (BOOL)hasKey:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (DTDRemoteConfigValue * _Nonnull)objectForKeyedSubscript:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (void)setObject:(DTDRemoteConfigValue * _Nonnull)newValue forKeyedSubscript:(NSString * _Nonnull)key;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1776,6 +1794,8 @@ SWIFT_CLASS("_TtC8iOSUnity17DTDVerifyResponse")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
+
+
 
 
 
