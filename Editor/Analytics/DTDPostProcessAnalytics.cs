@@ -13,6 +13,7 @@ namespace Assets.DevToDev.Analytics.Editor
         private const string SIMULATOR = "ios-arm64_i386_x86_64-simulator";
         private const string UNITY_ANALYTICS_NAME = "iOSUnity.framework";
         private const string PACKAGE_NAME = "com.devtodev.sdk.analytics";
+        private const bool IS_COPPA_ENABLED = false;
 
         [PostProcessBuild(98)]
         public static void OnPostProcessBuild(BuildTarget target, string pathToBuiltProject)
@@ -40,8 +41,11 @@ namespace Assets.DevToDev.Analytics.Editor
             var name = UnityEditor.iOS.Xcode.PBXProject.GetUnityTargetName();
             var targetGuid = project.TargetGuidByName(name);
 #endif
-            project.AddFrameworkToProject(targetGuid, "AdSupport.framework", true);
-            project.AddFrameworkToProject(targetGuid, "AppTrackingTransparency.framework", true);
+            if(!IS_COPPA_ENABLED)
+            {
+                project.AddFrameworkToProject(targetGuid, "AdSupport.framework", true);
+                project.AddFrameworkToProject(targetGuid, "AppTrackingTransparency.framework", true);
+            }
             var frameworkAbsolutePath = PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK
                 ? Path.Combine("Plugins", "DevToDev", "Analytics", "IOS", DEVICE)
                 : Path.Combine("Plugins", "DevToDev", "Analytics", "IOS", SIMULATOR);
