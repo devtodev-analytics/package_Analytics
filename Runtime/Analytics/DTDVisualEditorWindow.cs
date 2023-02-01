@@ -18,8 +18,8 @@ namespace DTDEditor
             "devtodev is a powerful all-in-one analytical tool for mobile and web applications. Explore your app metrics in one simple interface that includes teamwork features, game metrics, LTV forecast, and many other cool things.";
         private const string DTD_URL = "https://www.devtodev.com/myapps/";
 
-        [MenuItem("Window/devtodev")]
-        public static void ShowWindow()
+        [MenuItem("Window/devtodev/Configuration")]
+        public static void ShowConfigurationWindow()
         {
             var window =
                 (DTDVisualEditorWindow) EditorWindow.GetWindow(typeof(DTDVisualEditorWindow), false, "devtodev", true);

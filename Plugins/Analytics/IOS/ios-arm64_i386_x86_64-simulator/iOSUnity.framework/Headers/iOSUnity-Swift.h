@@ -653,7 +653,7 @@ typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigChangeResult, open) {
 /// Wrapper for remote parameters collection. Enables access to configuration values by using subscripting syntax.
 SWIFT_CLASS("_TtC8iOSUnity25DTDRemoteConfigCollection")
 @interface DTDRemoteConfigCollection : NSObject
-/// Check if current conguration have value for key
+/// Check if current configuration have value for a key
 - (BOOL)hasKey:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (DTDRemoteConfigValue * _Nonnull)objectForKeyedSubscript:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (void)setObject:(DTDRemoteConfigValue * _Nonnull)newValue forKeyedSubscript:(NSString * _Nonnull)key;
@@ -1556,7 +1556,7 @@ typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigChangeResult, open) {
 /// Wrapper for remote parameters collection. Enables access to configuration values by using subscripting syntax.
 SWIFT_CLASS("_TtC8iOSUnity25DTDRemoteConfigCollection")
 @interface DTDRemoteConfigCollection : NSObject
-/// Check if current conguration have value for key
+/// Check if current configuration have value for a key
 - (BOOL)hasKey:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (DTDRemoteConfigValue * _Nonnull)objectForKeyedSubscript:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (void)setObject:(DTDRemoteConfigValue * _Nonnull)newValue forKeyedSubscript:(NSString * _Nonnull)key;
@@ -2459,7 +2459,7 @@ typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigChangeResult, open) {
 /// Wrapper for remote parameters collection. Enables access to configuration values by using subscripting syntax.
 SWIFT_CLASS("_TtC8iOSUnity25DTDRemoteConfigCollection")
 @interface DTDRemoteConfigCollection : NSObject
-/// Check if current conguration have value for key
+/// Check if current configuration have value for a key
 - (BOOL)hasKey:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (DTDRemoteConfigValue * _Nonnull)objectForKeyedSubscript:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (void)setObject:(DTDRemoteConfigValue * _Nonnull)newValue forKeyedSubscript:(NSString * _Nonnull)key;
