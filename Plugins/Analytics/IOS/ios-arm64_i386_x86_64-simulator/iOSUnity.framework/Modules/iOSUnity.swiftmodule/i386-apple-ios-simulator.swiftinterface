@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
 // swift-module-flags: -target i386-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name iOSUnity
 import CryptoKit
 import Dispatch
@@ -9,6 +9,7 @@ import Security
 import StoreKit
 import Swift
 import UIKit
+import _Concurrency
 import os.log
 import os
 @_inheritsConvenienceInitializers @objc public class DTDEngineWrapper : ObjectiveC.NSObject {
@@ -25,8 +26,8 @@ import os
   @objc public static func testString(value: Swift.String)
   @objc public static func engineSubscriptionHistory(_ transactions: [Swift.String : [Swift.String]])
   @objc public static func engineSubscriprtionPayment(productId: Swift.String, transactionId: Swift.String)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @objc public class DTDReferralProperty : ObjectiveC.NSObject, Foundation.NSCopying {
   @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
@@ -67,8 +68,8 @@ import os
   public var description: Swift.String {
     get
   }
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -79,15 +80,15 @@ import os
   @objc override final public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc public enum DTDTrackingStatus : Swift.Int {
   case unknown
   case enable
   case disable
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -101,8 +102,8 @@ extension DTDTrackingStatus : Swift.CustomStringConvertible {
   case empty = 0
   case remote = 1
   case defaults = 2
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -120,8 +121,8 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc final public class DTDRemoteConfigValue : ObjectiveC.NSObject {
   @objc final public var value: Any
@@ -151,7 +152,6 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
     @objc get
   }
   @objc deinit
-  @objc override dynamic public init()
 }
 @_inheritsConvenienceInitializers @objc final public class DTDRemoteConfig : ObjectiveC.NSObject {
   @objc override dynamic public init()
@@ -182,8 +182,8 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -197,14 +197,14 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
   @objc override final public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc public enum DTDAccrualType : Swift.Int {
   case earned = 0
   case bought = 1
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -222,8 +222,8 @@ extension DTDAccrualType : Swift.CustomStringConvertible {
   @objc override final public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc final public class DTDRemoteConfigCollection : ObjectiveC.NSObject {
   public typealias ConfigCollection = [Swift.String : DTDRemoteConfigValue]
@@ -232,7 +232,6 @@ extension DTDAccrualType : Swift.CustomStringConvertible {
     @objc get
     @objc set
   }
-  @objc override dynamic public init()
   @objc deinit
 }
 extension DTDRemoteConfigCollection {
@@ -248,21 +247,21 @@ extension DTDRemoteConfigCollection {
   public var description: Swift.String {
     get
   }
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
   public init?(rawValue: Swift.Int)
   public typealias AllCases = [DTDLogLevel]
+  public typealias RawValue = Swift.Int
   public static var allCases: [DTDLogLevel] {
+    get
+  }
+  public var rawValue: Swift.Int {
     get
   }
 }
 @objc public enum DTDRemoteConfigChangeResult : Swift.Int {
   case failure = 0
   case success = 1
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -275,8 +274,8 @@ extension DTDRemoteConfigChangeResult : Swift.CustomStringConvertible {
 @objc public enum DTDRemoteConfigReceiveResult : Swift.Int {
   case failure = 0
   case success = 1
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -312,7 +311,6 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
   @objc public static let renren: DTDSocialNetwork
   @objc public static let tumblr: DTDSocialNetwork
   @objc deinit
-  @objc override dynamic public init()
 }
 @_inheritsConvenienceInitializers @objc public class DTDAntiCheat : ObjectiveC.NSObject {
   @objc public static func verifyPayment(receiptString: Swift.String, completionHandler: @escaping (DTDVerifyResponse) -> Swift.Void)
@@ -346,8 +344,8 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
   @objc(increment:byInt:) public static func increment(key: Swift.String, value: Swift.Int)
   @objc(increment:byDouble:) public static func increment(key: Swift.String, value: Swift.Double)
   @objc public static func clearUser()
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @objc public class DTDAnalytics : ObjectiveC.NSObject {
   @objc override dynamic public init()
@@ -388,6 +386,10 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
   @objc public static func isRestoreTransactionHistoryRequired(completionHandler: @escaping (Swift.Bool) -> Swift.Void)
   @objc public static func subscriptionHistory(transactions: [StoreKit.SKPaymentTransaction])
   @objc public static func subscriptionPayment(transaction: StoreKit.SKPaymentTransaction, product: StoreKit.SKProduct)
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public static func subscriptionHistory(transactions: [StoreKit.Transaction])
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public static func subscriptionPayment(transaction: StoreKit.Transaction, product: StoreKit.Product)
   @objc(socialNetworkConnect:) public static func socialNetworkConnect(socialNetwork: DTDSocialNetwork)
   @objc(socialNetworkPost:withReason:) public static func socialNetworkPost(socialNetwork: DTDSocialNetwork, reason: Swift.String)
   @objc(tutorialStep:) public static func tutorial(step: Swift.Int)

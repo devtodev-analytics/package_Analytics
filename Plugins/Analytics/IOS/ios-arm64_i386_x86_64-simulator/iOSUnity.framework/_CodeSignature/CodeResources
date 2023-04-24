@@ -22,83 +22,47 @@
 		</data>
 		<key>Headers/iOSUnity-Swift.h</key>
 		<data>
-		9dLrjGZ5JjJ4xSCPseDbqHrOZX8=
+		oOGkDjlElBUyMvP56HkJPh54z8M=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		AmLe1RV8n/w0qErpHVfK5QHfBiU=
+		cp2JFUMVxUM+zkZtH6tG4hiQmJo=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		+Xdoo5TkQL02YHG0Rk6OEqZIPa8=
+		1H+NS7b83lws4onBQtJNPxjnYYQ=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		ZxQf3AleCmA8DEmbQIt45+ucWtA=
+		/pH9ceEYlFVdkH84RvOzd2n15Vg=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		I/1b4xkIOHTudun8Feb+W1yWyBg=
-		</data>
-		<key>Modules/iOSUnity.swiftmodule/arm64.swiftdoc</key>
-		<data>
-		+Xdoo5TkQL02YHG0Rk6OEqZIPa8=
-		</data>
-		<key>Modules/iOSUnity.swiftmodule/arm64.swiftinterface</key>
-		<data>
-		ZxQf3AleCmA8DEmbQIt45+ucWtA=
-		</data>
-		<key>Modules/iOSUnity.swiftmodule/arm64.swiftmodule</key>
-		<data>
-		I/1b4xkIOHTudun8Feb+W1yWyBg=
+		x7weLyLiVdRzUyNDFmwSiG/vFmk=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		GqRh1QQPxqxcDOwfwbc+mZdsFz8=
+		QLbGlU0rZVqISK5h/4a7RM6x408=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		J0VyJA8MeZRWGPUmkd0VGU2ORyI=
+		svnW3kNG7TomSDPoMplaDjBQURc=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		/VysKyc383yJc75qoRM9t3O3IaA=
-		</data>
-		<key>Modules/iOSUnity.swiftmodule/i386.swiftdoc</key>
-		<data>
-		GqRh1QQPxqxcDOwfwbc+mZdsFz8=
-		</data>
-		<key>Modules/iOSUnity.swiftmodule/i386.swiftinterface</key>
-		<data>
-		J0VyJA8MeZRWGPUmkd0VGU2ORyI=
-		</data>
-		<key>Modules/iOSUnity.swiftmodule/i386.swiftmodule</key>
-		<data>
-		/VysKyc383yJc75qoRM9t3O3IaA=
+		SZt8PU5n5EwmhcEInAj+K1MxfSk=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		QPe0A4jx0Mv7H/7Zn29dYM6cC80=
+		U7SSryVKf8kQf33KsL5wiy6FCHI=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		QjPfDy6V6JR5k7VopSeN72IieDA=
+		sGo1avoNhzoxOcKuubzwIc62m5U=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		cXdJG0RngFw+YkguQ0BzXhn/HK4=
-		</data>
-		<key>Modules/iOSUnity.swiftmodule/x86_64.swiftdoc</key>
-		<data>
-		QPe0A4jx0Mv7H/7Zn29dYM6cC80=
-		</data>
-		<key>Modules/iOSUnity.swiftmodule/x86_64.swiftinterface</key>
-		<data>
-		QjPfDy6V6JR5k7VopSeN72IieDA=
-		</data>
-		<key>Modules/iOSUnity.swiftmodule/x86_64.swiftmodule</key>
-		<data>
-		cXdJG0RngFw+YkguQ0BzXhn/HK4=
+		kR09L38RXyoQX/8Or5amBaQnvpQ=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -155,209 +119,110 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9dLrjGZ5JjJ4xSCPseDbqHrOZX8=
+			oOGkDjlElBUyMvP56HkJPh54z8M=
 			</data>
 			<key>hash2</key>
 			<data>
-			380q/jRcEV3brMi3UarpBHjMMjQFILmMnqmTbCSuBZs=
+			UVzfE32dN1jPRCV04WIeiq0ljBmnsQk94+4P/cYakD0=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+Xdoo5TkQL02YHG0Rk6OEqZIPa8=
+			1H+NS7b83lws4onBQtJNPxjnYYQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			+BTGg53VmYogEW9sDEVkCcu8dZPyqE6xiFMYL8k/WWs=
+			YUnh0QaNR3WYv86F4+A6JgPszTc2v7xPHTsNZI8elXU=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZxQf3AleCmA8DEmbQIt45+ucWtA=
+			/pH9ceEYlFVdkH84RvOzd2n15Vg=
 			</data>
 			<key>hash2</key>
 			<data>
-			sMCr3u0ocaJtuzCs5axrWQfrRKExj4A7+4a8xid9bv0=
+			Au9oU2uxsI4d4UKizNJcKXE8yCQi8aCwMwLnW8AmS5A=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			I/1b4xkIOHTudun8Feb+W1yWyBg=
+			x7weLyLiVdRzUyNDFmwSiG/vFmk=
 			</data>
 			<key>hash2</key>
 			<data>
-			vr4GAMhnI0w9PSEl3Jlz9R3LLI31Dv37zKTS19snyCo=
-			</data>
-		</dict>
-		<key>Modules/iOSUnity.swiftmodule/arm64.swiftdoc</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			+Xdoo5TkQL02YHG0Rk6OEqZIPa8=
-			</data>
-			<key>hash2</key>
-			<data>
-			+BTGg53VmYogEW9sDEVkCcu8dZPyqE6xiFMYL8k/WWs=
-			</data>
-		</dict>
-		<key>Modules/iOSUnity.swiftmodule/arm64.swiftinterface</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			ZxQf3AleCmA8DEmbQIt45+ucWtA=
-			</data>
-			<key>hash2</key>
-			<data>
-			sMCr3u0ocaJtuzCs5axrWQfrRKExj4A7+4a8xid9bv0=
-			</data>
-		</dict>
-		<key>Modules/iOSUnity.swiftmodule/arm64.swiftmodule</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			I/1b4xkIOHTudun8Feb+W1yWyBg=
-			</data>
-			<key>hash2</key>
-			<data>
-			vr4GAMhnI0w9PSEl3Jlz9R3LLI31Dv37zKTS19snyCo=
+			6RONK4hC8/MgLDSwi5cFgT5z/32sL75Ma/yp5OXhq+8=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GqRh1QQPxqxcDOwfwbc+mZdsFz8=
+			QLbGlU0rZVqISK5h/4a7RM6x408=
 			</data>
 			<key>hash2</key>
 			<data>
-			ua5DtyM1AwdyFSQqdJ5wCohlTTnub0ALsBdF/nEwidc=
+			1EW6tFbWkodg4caoRs41SzKVk2fX7hPC+vXutP1p2DQ=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			J0VyJA8MeZRWGPUmkd0VGU2ORyI=
+			svnW3kNG7TomSDPoMplaDjBQURc=
 			</data>
 			<key>hash2</key>
 			<data>
-			VRIlkcpUgDL5CLzYrHmkxjrYPKF9x+qlnbBXT5+gKK8=
+			gYSgx85BV5jJoY17syKI4FXi0J0j8yPMIDGsM3xoHds=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/VysKyc383yJc75qoRM9t3O3IaA=
+			SZt8PU5n5EwmhcEInAj+K1MxfSk=
 			</data>
 			<key>hash2</key>
 			<data>
-			oEPNuBeZn7ETyedRBv6b+hnB8aUzYgvkdIbJCIFAKKE=
-			</data>
-		</dict>
-		<key>Modules/iOSUnity.swiftmodule/i386.swiftdoc</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			GqRh1QQPxqxcDOwfwbc+mZdsFz8=
-			</data>
-			<key>hash2</key>
-			<data>
-			ua5DtyM1AwdyFSQqdJ5wCohlTTnub0ALsBdF/nEwidc=
-			</data>
-		</dict>
-		<key>Modules/iOSUnity.swiftmodule/i386.swiftinterface</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			J0VyJA8MeZRWGPUmkd0VGU2ORyI=
-			</data>
-			<key>hash2</key>
-			<data>
-			VRIlkcpUgDL5CLzYrHmkxjrYPKF9x+qlnbBXT5+gKK8=
-			</data>
-		</dict>
-		<key>Modules/iOSUnity.swiftmodule/i386.swiftmodule</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			/VysKyc383yJc75qoRM9t3O3IaA=
-			</data>
-			<key>hash2</key>
-			<data>
-			oEPNuBeZn7ETyedRBv6b+hnB8aUzYgvkdIbJCIFAKKE=
+			BE9iZ/kYd7GJr5D1VT3GWR1vmPO7OKdWHhG6sX2TSbk=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QPe0A4jx0Mv7H/7Zn29dYM6cC80=
+			U7SSryVKf8kQf33KsL5wiy6FCHI=
 			</data>
 			<key>hash2</key>
 			<data>
-			f/epxDCP+/oCEE+0ik8IM+QbAvJGBTOUvod0G0LSynY=
+			u/8wlGcGlbZxSnPqjV9xpIJ1oLeJc2lyMf0zyEeOEVs=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QjPfDy6V6JR5k7VopSeN72IieDA=
+			sGo1avoNhzoxOcKuubzwIc62m5U=
 			</data>
 			<key>hash2</key>
 			<data>
-			7l1tP3a8+C59/niSGAzPfQcYyILlyaM+A5/8/6eT3RE=
+			Emhe5zZZLp8j9IlE+m163hEAI8KY4DokOxih43OipSc=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			cXdJG0RngFw+YkguQ0BzXhn/HK4=
+			kR09L38RXyoQX/8Or5amBaQnvpQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			s7zkTnO3vjCG4M+dXdwvY9ildXCzYs6m7n6jiu32/TE=
-			</data>
-		</dict>
-		<key>Modules/iOSUnity.swiftmodule/x86_64.swiftdoc</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			QPe0A4jx0Mv7H/7Zn29dYM6cC80=
-			</data>
-			<key>hash2</key>
-			<data>
-			f/epxDCP+/oCEE+0ik8IM+QbAvJGBTOUvod0G0LSynY=
-			</data>
-		</dict>
-		<key>Modules/iOSUnity.swiftmodule/x86_64.swiftinterface</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			QjPfDy6V6JR5k7VopSeN72IieDA=
-			</data>
-			<key>hash2</key>
-			<data>
-			7l1tP3a8+C59/niSGAzPfQcYyILlyaM+A5/8/6eT3RE=
-			</data>
-		</dict>
-		<key>Modules/iOSUnity.swiftmodule/x86_64.swiftmodule</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			cXdJG0RngFw+YkguQ0BzXhn/HK4=
-			</data>
-			<key>hash2</key>
-			<data>
-			s7zkTnO3vjCG4M+dXdwvY9ildXCzYs6m7n6jiu32/TE=
+			VUX+OP6K7s1ibeB1C2W9sMWTf/vPmvIViXCWhR2pgbY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

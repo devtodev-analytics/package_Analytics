@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
 // swift-module-flags: -target arm64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name iOSUnity
+import AdSupport
 import CryptoKit
 import Dispatch
 import Foundation
@@ -171,7 +172,6 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
     @objc get
   }
   @objc public static func applyConfig()
-  @objc public static func cacheTestExperiment()
   @objc public static func resetConfig()
   @objc deinit
 }
@@ -227,7 +227,6 @@ extension DTDAccrualType : Swift.CustomStringConvertible {
 }
 @_hasMissingDesignatedInitializers @objc final public class DTDRemoteConfigCollection : ObjectiveC.NSObject {
   public typealias ConfigCollection = [Swift.String : DTDRemoteConfigValue]
-  @objc(hasKey:) final public func hasKey(_ key: Swift.String) -> Swift.Bool
   @objc final public subscript(key: Swift.String) -> DTDRemoteConfigValue {
     @objc get
     @objc set
@@ -355,7 +354,6 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
     @objc get
     @objc set
   }
-  @objc public static func coppaControlEnable()
   @objc(deviceIdHandler:) public static func getDeviceId(completionHandler: @escaping (Swift.String) -> Swift.Void)
   @objc(sdkVersionHandler:) public static func getSDKVersion(completionHandler: @escaping (Swift.String) -> Swift.Void)
   @objc(trackingAvailabilityHandler:) public static func getTrackingAvailability(completionHandler: @escaping (Swift.Bool) -> Swift.Void)
