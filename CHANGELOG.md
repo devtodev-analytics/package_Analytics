@@ -1,3 +1,7 @@
+## [3.6.3] - 2023-06-9
+- Added xCode 14.3 support.
+- Fixed the logic of the CustomEvent method when it was called without parameters.
+
 ## [3.6.2] - 2023-06-2
 - Fixed Ab-test logic.
 - Fixed the logic of the AddImpression method.
