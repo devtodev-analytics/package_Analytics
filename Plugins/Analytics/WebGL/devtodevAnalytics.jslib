@@ -304,16 +304,26 @@ var DevToDev = {
             _logger.error('Execution of the replaceUserId method was canceled!');
         }
     },
-    levelUp: function(level, jsonString) {
+    levelUp: function(level){
         try {
-            if (jsonString == null || Pointer_stringify(jsonString).length == 0) {
-                window.devtodev.levelUp(level);
-                return;
-            }
-
-            var convertedJson = Pointer_stringify(jsonString);
-            var json = JSON.parse(convertedJson);
-            window.devtodev.levelUp(level, json.balance, json.spent, json.earned, json.bought);
+            window.devtodev.levelUp(level);
+        } catch (e) {
+            _logger.error('In the levelUp method error has occurred: ' + e);
+            _logger.error('Execution of the levelUp method was canceled!');
+        }
+    },
+    levelUpWithResources: function(
+        level, 
+        jsonBalance, 
+        jsonSpent,
+        jsonEarned,
+        jsonBought) {
+        try {
+            var balance = JSON.parse(Pointer_stringify(jsonBalance));
+            var spent = JSON.parse(Pointer_stringify(jsonSpent));
+            var earned = JSON.parse(Pointer_stringify(jsonEarned));
+            var bought = JSON.parse(Pointer_stringify(jsonBought));
+            window.devtodev.levelUp(level, balance, spent, earned, bought);
         } catch (e) {
             _logger.error('In the levelUp method error has occurred: ' + e);
             _logger.error('Execution of the levelUp method was canceled!');
