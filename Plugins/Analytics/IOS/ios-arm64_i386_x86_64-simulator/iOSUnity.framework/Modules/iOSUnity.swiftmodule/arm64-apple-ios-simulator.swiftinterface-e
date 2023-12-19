@@ -10,6 +10,7 @@ import StoreKit
 import Swift
 import UIKit
 import _Concurrency
+@_exported import iOSUnity
 import os.log
 import os
 @_inheritsConvenienceInitializers @objc public class DTDEngineWrapper : ObjectiveC.NSObject {
@@ -126,7 +127,9 @@ extension iOSUnity.DTDRemoteConfigSource : Swift.CustomStringConvertible {
 }
 @_hasMissingDesignatedInitializers @objc final public class DTDRemoteConfigValue : ObjectiveC.NSObject {
   @objc final public var value: Any
-  @objc final public var source: iOSUnity.DTDRemoteConfigSource
+  @objc final public var source: iOSUnity.DTDRemoteConfigSource {
+    @objc get
+  }
   @objc final public var stringValue: Swift.String? {
     @objc get
   }
@@ -226,13 +229,29 @@ extension iOSUnity.DTDAccrualType : Swift.CustomStringConvertible {
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc final public class DTDRemoteConfigCollection : ObjectiveC.NSObject {
-  public typealias ConfigCollection = [Swift.String : iOSUnity.DTDRemoteConfigValue]
   @objc(hasKey:) final public func hasKey(_ key: Swift.String) -> Swift.Bool
   @objc final public subscript(key: Swift.String) -> iOSUnity.DTDRemoteConfigValue {
     @objc get
     @objc set
   }
   @objc deinit
+}
+extension iOSUnity.DTDRemoteConfigCollection : Swift.Collection {
+  final public func index(after index: Swift.Dictionary<Swift.String, iOSUnity.DTDRemoteConfigValue>.Index) -> Swift.Dictionary<Swift.String, iOSUnity.DTDRemoteConfigValue>.Index
+  final public subscript(position: Swift.Dictionary<Swift.String, iOSUnity.DTDRemoteConfigValue>.Index) -> Swift.Dictionary<Swift.String, iOSUnity.DTDRemoteConfigValue>.Element {
+    get
+  }
+  final public var startIndex: Swift.Dictionary<Swift.String, iOSUnity.DTDRemoteConfigValue>.Index {
+    get
+  }
+  final public var endIndex: Swift.Dictionary<Swift.String, iOSUnity.DTDRemoteConfigValue>.Index {
+    get
+  }
+  public typealias Element = Swift.Dictionary<Swift.String, iOSUnity.DTDRemoteConfigValue>.Element
+  public typealias Index = Swift.Dictionary<Swift.String, iOSUnity.DTDRemoteConfigValue>.Index
+  public typealias Indices = Swift.DefaultIndices<iOSUnity.DTDRemoteConfigCollection>
+  public typealias Iterator = Swift.IndexingIterator<iOSUnity.DTDRemoteConfigCollection>
+  public typealias SubSequence = Swift.Slice<iOSUnity.DTDRemoteConfigCollection>
 }
 extension iOSUnity.DTDRemoteConfigCollection {
   @objc final public func getRawConfig() -> [Swift.String : iOSUnity.DTDRemoteConfigValue]
@@ -274,6 +293,7 @@ extension iOSUnity.DTDRemoteConfigChangeResult : Swift.CustomStringConvertible {
 @objc public enum DTDRemoteConfigReceiveResult : Swift.Int {
   case failure = 0
   case success = 1
+  case empty = 2
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -386,6 +406,10 @@ extension iOSUnity.DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible 
   @objc public static func isRestoreTransactionHistoryRequired(completionHandler: @escaping (Swift.Bool) -> Swift.Void)
   @objc public static func subscriptionHistory(transactions: [StoreKit.SKPaymentTransaction])
   @objc public static func subscriptionPayment(transaction: StoreKit.SKPaymentTransaction, product: StoreKit.SKProduct)
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public static func subscriptionHistory(transactions: [StoreKit.Transaction])
+  @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+  public static func subscriptionPayment(transaction: StoreKit.Transaction, product: StoreKit.Product)
   @objc(socialNetworkConnect:) public static func socialNetworkConnect(socialNetwork: iOSUnity.DTDSocialNetwork)
   @objc(socialNetworkPost:withReason:) public static func socialNetworkPost(socialNetwork: iOSUnity.DTDSocialNetwork, reason: Swift.String)
   @objc(tutorialStep:) public static func tutorial(step: Swift.Int)

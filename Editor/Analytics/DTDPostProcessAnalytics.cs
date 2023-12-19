@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-namespace Assets.DevToDev.Analytics.Editor
+namespace DevToDev.Analytics.Editor
 {
     public static class DTDPostProcessAnalytics
     {

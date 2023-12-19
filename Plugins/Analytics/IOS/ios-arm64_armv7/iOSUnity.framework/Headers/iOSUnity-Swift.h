@@ -672,6 +672,7 @@ SWIFT_CLASS("_TtC8iOSUnity25DTDRemoteConfigCollection")
 - (NSDictionary<NSString *, DTDRemoteConfigValue *> * _Nonnull)getRawConfig SWIFT_WARN_UNUSED_RESULT;
 @end
 
+
 enum DTDRemoteConfigReceiveResult : NSInteger;
 
 /// A listener for working with configuration
@@ -702,6 +703,8 @@ typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigReceiveResult, open) {
   DTDRemoteConfigReceiveResultFailure = 0,
 /// The configuration has been successfully receiving
   DTDRemoteConfigReceiveResultSuccess = 1,
+/// The configuration has been successfully receiving, but experimnets list is empty
+  DTDRemoteConfigReceiveResultEmpty = 2,
 };
 
 /// Source of configuration values
@@ -720,7 +723,7 @@ SWIFT_CLASS("_TtC8iOSUnity20DTDRemoteConfigValue")
 @interface DTDRemoteConfigValue : NSObject
 @property (nonatomic) id _Nonnull value;
 /// Identifies the source of the value.
-@property (nonatomic) enum DTDRemoteConfigSource source;
+@property (nonatomic, readonly) enum DTDRemoteConfigSource source;
 /// Gets the value as a string.
 @property (nonatomic, readonly, copy) NSString * _Nullable stringValue;
 /// Gets the value as a float.
@@ -1581,6 +1584,7 @@ SWIFT_CLASS("_TtC8iOSUnity25DTDRemoteConfigCollection")
 - (NSDictionary<NSString *, DTDRemoteConfigValue *> * _Nonnull)getRawConfig SWIFT_WARN_UNUSED_RESULT;
 @end
 
+
 enum DTDRemoteConfigReceiveResult : NSInteger;
 
 /// A listener for working with configuration
@@ -1611,6 +1615,8 @@ typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigReceiveResult, open) {
   DTDRemoteConfigReceiveResultFailure = 0,
 /// The configuration has been successfully receiving
   DTDRemoteConfigReceiveResultSuccess = 1,
+/// The configuration has been successfully receiving, but experimnets list is empty
+  DTDRemoteConfigReceiveResultEmpty = 2,
 };
 
 /// Source of configuration values
@@ -1629,7 +1635,7 @@ SWIFT_CLASS("_TtC8iOSUnity20DTDRemoteConfigValue")
 @interface DTDRemoteConfigValue : NSObject
 @property (nonatomic) id _Nonnull value;
 /// Identifies the source of the value.
-@property (nonatomic) enum DTDRemoteConfigSource source;
+@property (nonatomic, readonly) enum DTDRemoteConfigSource source;
 /// Gets the value as a string.
 @property (nonatomic, readonly, copy) NSString * _Nullable stringValue;
 /// Gets the value as a float.
