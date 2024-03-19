@@ -533,16 +533,6 @@ SWIFT_CLASS("_TtC8iOSUnity35DTDFinishProgressionEventParameters")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-/// Enumeration of gender types
-typedef SWIFT_ENUM_NAMED(NSInteger, Gender, "DTDGender", open) {
-/// The undecided
-  GenderUnknown = 0,
-/// The male
-  GenderMale = 1,
-/// The female
-  GenderFemale = 2,
-};
-
 
 /// Delegate for receive devtodev identifiers
 SWIFT_PROTOCOL("_TtP8iOSUnity22DTDIdentifiersListener_")
@@ -808,30 +798,6 @@ typedef SWIFT_ENUM(NSInteger, DTDTrackingStatus, open) {
 
 SWIFT_CLASS("_TtC8iOSUnity11DTDUserCard")
 @interface DTDUserCard : NSObject
-/// Set User name
-+ (void)setName:(NSString * _Nonnull)name;
-/// Get User name
-+ (void)getNameHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
-/// Set User email
-+ (void)setEmail:(NSString * _Nonnull)email;
-/// Get User email
-+ (void)getEmailHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
-/// Set User phone number
-+ (void)setPhone:(NSString * _Nonnull)phone;
-/// Get User phone number
-+ (void)getPhoneHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
-/// Set User photo
-+ (void)setPhoto:(NSString * _Nonnull)photo;
-/// Get User photo
-+ (void)getPhotoHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
-/// Set User gender
-+ (void)setGender:(enum Gender)gender;
-/// Get User gender
-+ (void)getGenderHandler:(void (^ _Nonnull)(enum Gender))completionHandler;
-/// Set User age
-+ (void)setAge:(NSInteger)age;
-/// Get User age
-+ (void)getAgeHandler:(void (^ _Nonnull)(NSInteger))completionHandler;
 /// Set User cheater
 + (void)setCheater:(BOOL)cheater;
 /// Set User tester
@@ -1445,16 +1411,6 @@ SWIFT_CLASS("_TtC8iOSUnity35DTDFinishProgressionEventParameters")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-/// Enumeration of gender types
-typedef SWIFT_ENUM_NAMED(NSInteger, Gender, "DTDGender", open) {
-/// The undecided
-  GenderUnknown = 0,
-/// The male
-  GenderMale = 1,
-/// The female
-  GenderFemale = 2,
-};
-
 
 /// Delegate for receive devtodev identifiers
 SWIFT_PROTOCOL("_TtP8iOSUnity22DTDIdentifiersListener_")
@@ -1720,30 +1676,6 @@ typedef SWIFT_ENUM(NSInteger, DTDTrackingStatus, open) {
 
 SWIFT_CLASS("_TtC8iOSUnity11DTDUserCard")
 @interface DTDUserCard : NSObject
-/// Set User name
-+ (void)setName:(NSString * _Nonnull)name;
-/// Get User name
-+ (void)getNameHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
-/// Set User email
-+ (void)setEmail:(NSString * _Nonnull)email;
-/// Get User email
-+ (void)getEmailHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
-/// Set User phone number
-+ (void)setPhone:(NSString * _Nonnull)phone;
-/// Get User phone number
-+ (void)getPhoneHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
-/// Set User photo
-+ (void)setPhoto:(NSString * _Nonnull)photo;
-/// Get User photo
-+ (void)getPhotoHandler:(void (^ _Nonnull)(NSString * _Nonnull))completionHandler;
-/// Set User gender
-+ (void)setGender:(enum Gender)gender;
-/// Get User gender
-+ (void)getGenderHandler:(void (^ _Nonnull)(enum Gender))completionHandler;
-/// Set User age
-+ (void)setAge:(NSInteger)age;
-/// Get User age
-+ (void)getAgeHandler:(void (^ _Nonnull)(NSInteger))completionHandler;
 /// Set User cheater
 + (void)setCheater:(BOOL)cheater;
 /// Set User tester

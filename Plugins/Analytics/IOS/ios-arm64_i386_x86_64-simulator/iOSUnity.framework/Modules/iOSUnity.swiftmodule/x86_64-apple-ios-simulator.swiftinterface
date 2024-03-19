@@ -178,19 +178,6 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
   @objc public static func resetConfig()
   @objc deinit
 }
-@objc(Gender) public enum DTDGender : Swift.Int {
-  case unknown = 0
-  case male = 1
-  case female = 2
-  public var description: Swift.String {
-    get
-  }
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
 @_inheritsConvenienceInitializers @objc final public class DTDCustomEventParameters : ObjectiveC.NSObject {
   @objc(addBool:value:) final public func add(key: Swift.String, value: Swift.Bool)
   @objc(addInt:value:) final public func add(key: Swift.String, value: Swift.Int)
@@ -340,18 +327,6 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
   @objc deinit
 }
 @_inheritsConvenienceInitializers @objc public class DTDUserCard : ObjectiveC.NSObject {
-  @objc(setName:) public static func setName(name: Swift.String)
-  @objc(getNameHandler:) public static func getName(completionHandler: @escaping (Swift.String) -> Swift.Void)
-  @objc(setEmail:) public static func setEmail(email: Swift.String)
-  @objc(getEmailHandler:) public static func getEmail(completionHandler: @escaping (Swift.String) -> Swift.Void)
-  @objc(setPhone:) public static func setPhone(phone: Swift.String)
-  @objc(getPhoneHandler:) public static func getPhone(completionHandler: @escaping (Swift.String) -> Swift.Void)
-  @objc(setPhoto:) public static func setPhoto(photo: Swift.String)
-  @objc(getPhotoHandler:) public static func getPhoto(completionHandler: @escaping (Swift.String) -> Swift.Void)
-  @objc(setGender:) public static func setGender(gender: DTDGender)
-  @objc(getGenderHandler:) public static func getGender(completionHandler: @escaping (DTDGender) -> Swift.Void)
-  @objc(setAge:) public static func setAge(age: Swift.Int)
-  @objc(getAgeHandler:) public static func getAge(completionHandler: @escaping (Swift.Int) -> Swift.Void)
   @objc(setCheater:) public static func setCheater(cheater: Swift.Bool)
   @objc(setTester:) public static func setTester(tester: Swift.Bool)
   @objc(setString:value:) public static func set(key: Swift.String, value: Swift.String)
@@ -441,9 +416,6 @@ extension DTDTrackingStatus : Swift.RawRepresentable {}
 extension DTDRemoteConfigSource : Swift.Equatable {}
 extension DTDRemoteConfigSource : Swift.Hashable {}
 extension DTDRemoteConfigSource : Swift.RawRepresentable {}
-extension DTDGender : Swift.Equatable {}
-extension DTDGender : Swift.Hashable {}
-extension DTDGender : Swift.RawRepresentable {}
 extension DTDAccrualType : Swift.Equatable {}
 extension DTDAccrualType : Swift.Hashable {}
 extension DTDAccrualType : Swift.RawRepresentable {}

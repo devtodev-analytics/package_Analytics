@@ -23,11 +23,12 @@ var DevToDev = {
             _logger.error('Execution of the initialize method was canceled!');
         }
     },
-    initializeWithConfig: function(appKey, userId, currentLevel, trackingAvailability, logLevel) {
+    initializeWithConfig: function(appKey, userId, currentLevel, trackingAvailability, logLevel, applicationVersion) {
         try {
             var args = {};
             args['userId'] = Pointer_stringify(userId);
             args['logLevel'] = Pointer_stringify(logLevel);
+            args['applicationVersion'] = Pointer_stringify(applicationVersion);
             if (Pointer_stringify(currentLevel) != 'null') {
                 args['currentLevel'] = parseInt(Pointer_stringify(currentLevel));
             }
