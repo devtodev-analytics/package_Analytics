@@ -3,9 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>files</key>
-	<dict/>
+	<dict>
+		<key>Resources/PrivacyInfo.xcprivacy</key>
+		<data>
+		6hjKhj7GXRZ8rcC2g/zCD6QdRIk=
+		</data>
+	</dict>
 	<key>files2</key>
-	<dict/>
+	<dict>
+		<key>Resources/PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			4CbGVsJEd9WEFmt4UkKPiK9Xk0Z9c5NN2I0uWly1um4=
+			</data>
+		</dict>
+	</dict>
 	<key>rules</key>
 	<dict>
 		<key>^Resources/</key>

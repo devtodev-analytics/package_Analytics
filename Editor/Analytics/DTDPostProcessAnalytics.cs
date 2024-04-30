@@ -3,15 +3,15 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Callbacks;
+using UnityEditor.iOS.Xcode;
+using UnityEditor.iOS.Xcode.Extensions;
 using UnityEngine;
 
 namespace DevToDev.Analytics.Editor
 {
     public static class DTDPostProcessAnalytics
     {
-        private const string DEVICE = "ios-arm64_armv7";
-        private const string SIMULATOR = "ios-arm64_i386_x86_64-simulator";
-        private const string UNITY_ANALYTICS_NAME = "iOSUnity.framework";
+        private const string UNITY_ANALYTICS_NAME = "DTDAnalyticsiOSUnity.xcframework";
         private const string PACKAGE_NAME = "com.devtodev.sdk.analytics";
         private const bool IS_COPPA_ENABLED = false;
 
@@ -41,28 +41,40 @@ namespace DevToDev.Analytics.Editor
             var name = UnityEditor.iOS.Xcode.PBXProject.GetUnityTargetName();
             var targetGuid = project.TargetGuidByName(name);
 #endif
-            if(!IS_COPPA_ENABLED)
+            if (!IS_COPPA_ENABLED)
             {
                 project.AddFrameworkToProject(targetGuid, "AdSupport.framework", true);
                 project.AddFrameworkToProject(targetGuid, "AppTrackingTransparency.framework", true);
             }
-            var frameworkAbsolutePath = PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK
-                ? Path.Combine("Plugins", "DevToDev", "Analytics", "IOS", DEVICE)
-                : Path.Combine("Plugins", "DevToDev", "Analytics", "IOS", SIMULATOR);
+
+            var frameworkAbsolutePath = Path.Combine("Plugins", "DevToDev", "Analytics", "IOS");
             frameworkAbsolutePath = Path.Combine(Application.dataPath, frameworkAbsolutePath, UNITY_ANALYTICS_NAME);
-            
-            if (!Directory.Exists(frameworkAbsolutePath))
+            if(!Directory.Exists(frameworkAbsolutePath))
             {
-                frameworkAbsolutePath = PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK
-                    ? Path.Combine("Packages", PACKAGE_NAME, "Plugins", "Analytics", "IOS", DEVICE)
-                    : Path.Combine("Packages", PACKAGE_NAME, "Plugins", "Analytics", "IOS", SIMULATOR);
+                frameworkAbsolutePath = Path.Combine("Packages", PACKAGE_NAME, "Plugins", "Analytics", "IOS");
                 frameworkAbsolutePath = Path.GetFullPath(Path.Combine(frameworkAbsolutePath, UNITY_ANALYTICS_NAME));
             }
-            Debug.Log(frameworkAbsolutePath);
+
             AddAnalyticsFramework(pathToBuiltProject, project, targetGuid, frameworkAbsolutePath);
             File.WriteAllText(projectPath, project.WriteToString());
         }
 
+        /*
+         *             foreach (var framework in frameworks)
+            {
+                var destPath = Path.Combine(path, xcodeFrameworksFolder, framework);
+                var frameworkAssets = AssetDatabase.FindAssets(framework);
+                if (frameworkAssets.Length == 0)
+                {
+                    Debug.LogError($"Could not find {framework} in the project");
+                }
+                CopyDirectory(AssetDatabase.GUIDToAssetPath(frameworkAssets.First()), destPath);
+                var fileGuid = project.AddFile(destPath, $"Frameworks/{framework}");
+                var frameworksBuildPhaseGuid = project.GetFrameworksBuildPhaseByTarget(targetGuid);
+                project.AddFileToBuildSection(targetGuid, frameworksBuildPhaseGuid, fileGuid);
+                project.AddFileToEmbedFrameworks(targetGuid, fileGuid);
+            }
+         */
         private static void AddAnalyticsFramework(string projectPath, UnityEditor.iOS.Xcode.PBXProject project,
             string targetGuid,
             string frameworkPath)
@@ -70,11 +82,17 @@ namespace DevToDev.Analytics.Editor
             var destinationFrameworkFilePath = Path.Combine(projectPath, "Frameworks", UNITY_ANALYTICS_NAME);
             // Copy framework
             DirectoryCopy(frameworkPath, destinationFrameworkFilePath, true);
-
             // Add declaration to .xcodeproj.
+
             var fileInBuild =
                 project.AddFile($"Frameworks/{UNITY_ANALYTICS_NAME}", $"Frameworks/{UNITY_ANALYTICS_NAME}");
-            project.AddFileToBuild(targetGuid, fileInBuild);
+            var unityFrameworkLinkPhaseGuid = project.GetFrameworksBuildPhaseByTarget(targetGuid);
+
+            project.AddFileToEmbedFrameworks(targetGuid, fileInBuild);
+            //------------
+            project.AddFileToBuildSection(targetGuid, unityFrameworkLinkPhaseGuid, fileInBuild);
+            //------------
+
             project.AddBuildProperty(targetGuid, "FRAMEWORK_SEARCH_PATHS", "$(SRCROOT)/Frameworks");
             var defaultProperties = project.GetBuildPropertyForAnyConfig(targetGuid, "LD_RUNPATH_SEARCH_PATHS");
             project.SetBuildProperty(targetGuid, "LD_RUNPATH_SEARCH_PATHS", "/usr/lib/swift");
@@ -100,6 +118,8 @@ namespace DevToDev.Analytics.Editor
             {
                 project.AddBuildProperty(targetGuid, "LIBRARY_SEARCH_PATHS", property);
             }
+            project.AddFrameworkToProject(targetGuid, UNITY_ANALYTICS_NAME, true);
+
 
 #if !UNITY_2019_3_OR_NEWER
             project.SetBuildProperty(targetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
@@ -152,6 +172,7 @@ namespace DevToDev.Analytics.Editor
                 files = dir.GetFiles();
             }
 
+            files = files.Where(x => x.Extension != ".meta").Where(x=>x.Extension!=".DS_Store").ToArray();
             // Copy files to the new location
             foreach (FileInfo file in files)
             {
