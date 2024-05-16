@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
@@ -49,7 +50,7 @@ namespace DevToDev.Analytics.Editor
 
             var frameworkAbsolutePath = Path.Combine("Plugins", "DevToDev", "Analytics", "IOS");
             frameworkAbsolutePath = Path.Combine(Application.dataPath, frameworkAbsolutePath, UNITY_ANALYTICS_NAME);
-            if(!Directory.Exists(frameworkAbsolutePath))
+            if (!Directory.Exists(frameworkAbsolutePath))
             {
                 frameworkAbsolutePath = Path.Combine("Packages", PACKAGE_NAME, "Plugins", "Analytics", "IOS");
                 frameworkAbsolutePath = Path.GetFullPath(Path.Combine(frameworkAbsolutePath, UNITY_ANALYTICS_NAME));
@@ -59,39 +60,32 @@ namespace DevToDev.Analytics.Editor
             File.WriteAllText(projectPath, project.WriteToString());
         }
 
-        /*
-         *             foreach (var framework in frameworks)
-            {
-                var destPath = Path.Combine(path, xcodeFrameworksFolder, framework);
-                var frameworkAssets = AssetDatabase.FindAssets(framework);
-                if (frameworkAssets.Length == 0)
-                {
-                    Debug.LogError($"Could not find {framework} in the project");
-                }
-                CopyDirectory(AssetDatabase.GUIDToAssetPath(frameworkAssets.First()), destPath);
-                var fileGuid = project.AddFile(destPath, $"Frameworks/{framework}");
-                var frameworksBuildPhaseGuid = project.GetFrameworksBuildPhaseByTarget(targetGuid);
-                project.AddFileToBuildSection(targetGuid, frameworksBuildPhaseGuid, fileGuid);
-                project.AddFileToEmbedFrameworks(targetGuid, fileGuid);
-            }
-         */
         private static void AddAnalyticsFramework(string projectPath, UnityEditor.iOS.Xcode.PBXProject project,
             string targetGuid,
             string frameworkPath)
         {
-            var destinationFrameworkFilePath = Path.Combine(projectPath, "Frameworks", UNITY_ANALYTICS_NAME);
-            // Copy framework
-            DirectoryCopy(frameworkPath, destinationFrameworkFilePath, true);
-            // Add declaration to .xcodeproj.
+            bool xcFrameworkSupported;
+            try
+            {
+                var version = GetVersion(Application.unityVersion);
+                xcFrameworkSupported = IsXcFrameworkSupported(version[0], version[1], version[2]);
+            }
+            catch (Exception)
+            {
 
-            var fileInBuild =
-                project.AddFile($"Frameworks/{UNITY_ANALYTICS_NAME}", $"Frameworks/{UNITY_ANALYTICS_NAME}");
-            var unityFrameworkLinkPhaseGuid = project.GetFrameworksBuildPhaseByTarget(targetGuid);
-
-            project.AddFileToEmbedFrameworks(targetGuid, fileInBuild);
-            //------------
-            project.AddFileToBuildSection(targetGuid, unityFrameworkLinkPhaseGuid, fileInBuild);
-            //------------
+                xcFrameworkSupported = false;
+            }
+            if (!xcFrameworkSupported)
+            {
+                var destinationFrameworkFilePath = Path.Combine(projectPath, "Frameworks", UNITY_ANALYTICS_NAME);
+                // Copy framework
+                DirectoryCopy(frameworkPath, destinationFrameworkFilePath, true);
+                // Add declaration to .xcodeproj.
+                var fileInBuild =
+                    project.AddFile($"Frameworks/{UNITY_ANALYTICS_NAME}", $"Frameworks/{UNITY_ANALYTICS_NAME}");
+                string targetBuildPhaseGuid = project.AddFrameworksBuildPhase(targetGuid);
+                project.AddFileToBuildSection(targetGuid, targetBuildPhaseGuid, fileInBuild);
+            }
 
             project.AddBuildProperty(targetGuid, "FRAMEWORK_SEARCH_PATHS", "$(SRCROOT)/Frameworks");
             var defaultProperties = project.GetBuildPropertyForAnyConfig(targetGuid, "LD_RUNPATH_SEARCH_PATHS");
@@ -118,8 +112,6 @@ namespace DevToDev.Analytics.Editor
             {
                 project.AddBuildProperty(targetGuid, "LIBRARY_SEARCH_PATHS", property);
             }
-            project.AddFrameworkToProject(targetGuid, UNITY_ANALYTICS_NAME, true);
-
 
 #if !UNITY_2019_3_OR_NEWER
             project.SetBuildProperty(targetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
@@ -157,7 +149,7 @@ namespace DevToDev.Analytics.Editor
 
             DirectoryInfo[] dirs = dir.GetDirectories();
 
-            // If the destination directory doesn't exist, create it.       
+            // If the destination directory doesn't exist, create it.
             Directory.CreateDirectory(destDirName);
 
             FileInfo[] files = null;
@@ -172,7 +164,7 @@ namespace DevToDev.Analytics.Editor
                 files = dir.GetFiles();
             }
 
-            files = files.Where(x => x.Extension != ".meta").Where(x=>x.Extension!=".DS_Store").ToArray();
+            files = files.Where(x => x.Extension != ".meta").Where(x => x.Extension != ".DS_Store").ToArray();
             // Copy files to the new location
             foreach (FileInfo file in files)
             {
@@ -190,6 +182,39 @@ namespace DevToDev.Analytics.Editor
                     DirectoryCopy(subdir.FullName, tempPath, copySubDirs, specificExtensions);
                 }
             }
+        }
+        private static int[] GetVersion(string version)
+        {
+            var match = Regex.Match(version, @"^(\d+)\.(\d+)\.(\d+)([a-z]?)(\d*)$", RegexOptions.IgnoreCase);
+            int major, minor, patch;
+            if (match.Success)
+            {
+                major = int.Parse(match.Groups[1].Value);
+                minor = int.Parse(match.Groups[2].Value);
+                patch = int.Parse(match.Groups[3].Value);
+            }
+            else
+            {
+                string cleanedVersion = Regex.Replace(Application.unityVersion, "[^0-9.]", "");
+                major = int.Parse(cleanedVersion.Split('.')[0]);
+                minor = int.Parse(cleanedVersion.Split('.')[1]);
+                patch = int.Parse(cleanedVersion.Split('.')[2]);
+            }
+
+            return new int[] { major, minor, patch };
+        }
+
+        private static bool IsXcFrameworkSupported(int major, int minor, int patch)
+        {
+            switch (major)
+            {
+                case 6000: return true;
+                case 2021: return (minor >= 3 && patch >= 37);
+                case 2022: return (minor >= 3 && patch >= 23);
+                case 2023: return (minor >= 2 && patch >= 18);
+            }
+
+            return false;
         }
     }
 }
