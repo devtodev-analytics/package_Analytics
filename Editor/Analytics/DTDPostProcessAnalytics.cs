@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_IOS
+using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -27,7 +28,6 @@ namespace DevToDev.Analytics.Editor
 
         private static void OnPostProcessBuildIOS(BuildTarget target, string pathToBuiltProject)
         {
-#if UNITY_IOS
             var projectPath = pathToBuiltProject + "/Unity-iPhone.xcodeproj/project.pbxproj";
             var project = new UnityEditor.iOS.Xcode.PBXProject();
             project.ReadFromString(File.ReadAllText(projectPath));
@@ -115,7 +115,6 @@ namespace DevToDev.Analytics.Editor
 
 #if !UNITY_2019_3_OR_NEWER
             project.SetBuildProperty(targetGuid, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
-#endif
 #endif
         }
 
@@ -218,3 +217,4 @@ namespace DevToDev.Analytics.Editor
         }
     }
 }
+#endif
