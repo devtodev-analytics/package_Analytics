@@ -46,7 +46,7 @@
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		MZxX6Na5USYR4OOsyk2BT6UvleU=
+		PUtmtfhv77YNfgFFI9GGMwJkGXU=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -62,11 +62,11 @@
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		AyoYA3LcdxX+KVhpkCfh47iJ34U=
+		1eao+/Dh4KTUis/FBmJtzEjXIdw=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		MZxX6Na5USYR4OOsyk2BT6UvleU=
+		PUtmtfhv77YNfgFFI9GGMwJkGXU=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -82,7 +82,7 @@
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		gdQif9asPgZBh++sZUQNYiOz7Kk=
+		MmDIzBdX6pUzSuA7XHSYavGvA8o=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -198,11 +198,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			MZxX6Na5USYR4OOsyk2BT6UvleU=
+			PUtmtfhv77YNfgFFI9GGMwJkGXU=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z8KQrthFgP8R1aA5MzRwguIFR92I3oVnIrYfzKgSigU=
+			OLwUvt0L9lSBBGxsXqnDRgX4UPQb2i84HrvbgOKhHVs=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -242,22 +242,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AyoYA3LcdxX+KVhpkCfh47iJ34U=
+			1eao+/Dh4KTUis/FBmJtzEjXIdw=
 			</data>
 			<key>hash2</key>
 			<data>
-			jfVbvgJuxi7W+rH7KOBEWaB75gNh9DtcvSVHQoDKAjg=
+			56nvOhOgTrihM1V37jyX6TR2QeXXcN2rSyZKsufSth8=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MZxX6Na5USYR4OOsyk2BT6UvleU=
+			PUtmtfhv77YNfgFFI9GGMwJkGXU=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z8KQrthFgP8R1aA5MzRwguIFR92I3oVnIrYfzKgSigU=
+			OLwUvt0L9lSBBGxsXqnDRgX4UPQb2i84HrvbgOKhHVs=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -297,11 +297,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gdQif9asPgZBh++sZUQNYiOz7Kk=
+			MmDIzBdX6pUzSuA7XHSYavGvA8o=
 			</data>
 			<key>hash2</key>
 			<data>
-			IMpBdQnCQrSQJAaK0LH2IhAXoVLf1Cz0cifxiA5qcLM=
+			IWTvySA8G8ay3vLXhUMFhzCd1ADRyKmA7jsQmCGKpck=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

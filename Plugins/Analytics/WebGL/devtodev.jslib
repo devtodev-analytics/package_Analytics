@@ -36,7 +36,7 @@ var devtodevPlugin = {
      */
     removeItem: function(key) {
         try {
-            window.localStorage.removeItem(Pointer_stringify(key));
+            window.localStorage.removeItem(UTF8ToString(key));
         } catch (e) {}
 
     },
@@ -48,7 +48,7 @@ var devtodevPlugin = {
      */
     setItem: function(key, value) {
         try {
-            window.localStorage.setItem(Pointer_stringify(key), Pointer_stringify(value));
+            window.localStorage.setItem(UTF8ToString(key), UTF8ToString(value));
         } catch (e) {}
     },
 
@@ -58,7 +58,7 @@ var devtodevPlugin = {
      */
     getItem: function(key) {
         try {
-            var result = window.localStorage.getItem(Pointer_stringify(key));
+            var result = window.localStorage.getItem(UTF8ToString(key));
             result = result === 'undefined' ? null : result;
             if (result != null) {
                 var buffer = _malloc(lengthBytesUTF8(result) + 1);
