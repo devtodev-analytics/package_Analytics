@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/iOSUnity-Swift.h</key>
 		<data>
-		+hOTX/a6+zpuSWScTknw0EW3Vok=
+		34hIdUMw6Fu49IOUSspNUKpAhpw=
 		</data>
 		<key>Headers/iOSUnity.h</key>
 		<data>
@@ -42,47 +42,47 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		2ky82/3tMgaOpYdRO8ufwrVHwcg=
+		vkgUNPxmaWpUW0SiQ2Irw5HJoRE=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		zZXk+6MnK935rGMVk3SI2RHb2W8=
+		PUtmtfhv77YNfgFFI9GGMwJkGXU=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		7KM0ZtrcmNputpIgxx/flhIP3B8=
+		P/Fi41z61NEEb7nSsqmAHOAsa+o=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Z8NJvP7ID+j3dRW0SOw6rYNPcdg=
+		ECysTsOTStvPMW2EosviBygfNSM=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		7KM0ZtrcmNputpIgxx/flhIP3B8=
+		P/Fi41z61NEEb7nSsqmAHOAsa+o=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		JPYXjLKbkpPxn/DAZ5BRXW6l0oc=
+		1eao+/Dh4KTUis/FBmJtzEjXIdw=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		zZXk+6MnK935rGMVk3SI2RHb2W8=
+		PUtmtfhv77YNfgFFI9GGMwJkGXU=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		0YF7l8w2kkzZsysXlMXHpEI53sg=
+		yDPTsmWJGBvfg5zyZxsPxNaYsrM=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		jZKPxxrZq++milLsNOmHH8Nb/Iw=
+		Rcov/ONYaD8Ey+2PGmUNAS+bp7s=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		0YF7l8w2kkzZsysXlMXHpEI53sg=
+		yDPTsmWJGBvfg5zyZxsPxNaYsrM=
 		</data>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		bumPF9HeVg3PBlYwVJ7S02hmx24=
+		MmDIzBdX6pUzSuA7XHSYavGvA8o=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -90,7 +90,7 @@
 		</data>
 		<key>PrivacyInfo.xcprivacy</key>
 		<data>
-		q3ZBWNetdEGko70psMGvq3h2wpE=
+		6hjKhj7GXRZ8rcC2g/zCD6QdRIk=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -154,11 +154,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+hOTX/a6+zpuSWScTknw0EW3Vok=
+			34hIdUMw6Fu49IOUSspNUKpAhpw=
 			</data>
 			<key>hash2</key>
 			<data>
-			f1HSakpX7vj/bjJvx9pfRVVWqNDzphINbTal3LaciX4=
+			K1+ViiY44mm5x9hRlRwSveYfuoi20rskjBaYJar8qWo=
 			</data>
 		</dict>
 		<key>Headers/iOSUnity.h</key>
@@ -198,110 +198,110 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zZXk+6MnK935rGMVk3SI2RHb2W8=
+			PUtmtfhv77YNfgFFI9GGMwJkGXU=
 			</data>
 			<key>hash2</key>
 			<data>
-			EUJoaH3GEMgC6cRGP5QIHDGL526z+2dVnYo0aCNOjyA=
+			OLwUvt0L9lSBBGxsXqnDRgX4UPQb2i84HrvbgOKhHVs=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7KM0ZtrcmNputpIgxx/flhIP3B8=
+			P/Fi41z61NEEb7nSsqmAHOAsa+o=
 			</data>
 			<key>hash2</key>
 			<data>
-			57k1Uo+XOMlGPWAAe9WZbRbx3x5NPzwd9gMoqmqZgp0=
+			VILZ6o56FHIbuM2XgTzjoAmpivdEBKmQALhXXgijDCk=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Z8NJvP7ID+j3dRW0SOw6rYNPcdg=
+			ECysTsOTStvPMW2EosviBygfNSM=
 			</data>
 			<key>hash2</key>
 			<data>
-			zhTaHTrCO2/5zNrjgn70SOMcad+xSMmeJnLxd/TXvXc=
+			b7IuA9PHiW3CQF4iVI1ta+N9QihLiwSsQ/KKCcgcTrw=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7KM0ZtrcmNputpIgxx/flhIP3B8=
+			P/Fi41z61NEEb7nSsqmAHOAsa+o=
 			</data>
 			<key>hash2</key>
 			<data>
-			57k1Uo+XOMlGPWAAe9WZbRbx3x5NPzwd9gMoqmqZgp0=
+			VILZ6o56FHIbuM2XgTzjoAmpivdEBKmQALhXXgijDCk=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JPYXjLKbkpPxn/DAZ5BRXW6l0oc=
+			1eao+/Dh4KTUis/FBmJtzEjXIdw=
 			</data>
 			<key>hash2</key>
 			<data>
-			1v34vwsDPWjviKZftu8O+42zbryN2MuyK8aV4AbJa8k=
+			56nvOhOgTrihM1V37jyX6TR2QeXXcN2rSyZKsufSth8=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zZXk+6MnK935rGMVk3SI2RHb2W8=
+			PUtmtfhv77YNfgFFI9GGMwJkGXU=
 			</data>
 			<key>hash2</key>
 			<data>
-			EUJoaH3GEMgC6cRGP5QIHDGL526z+2dVnYo0aCNOjyA=
+			OLwUvt0L9lSBBGxsXqnDRgX4UPQb2i84HrvbgOKhHVs=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0YF7l8w2kkzZsysXlMXHpEI53sg=
+			yDPTsmWJGBvfg5zyZxsPxNaYsrM=
 			</data>
 			<key>hash2</key>
 			<data>
-			CsODOSj7pjAHBSU8LDcClaXF7jcFRw8O/E0VsqwzXcc=
+			HsoTsXMPAqM69vnV00/M9nsewixCdNU4a4a+E+r53aI=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jZKPxxrZq++milLsNOmHH8Nb/Iw=
+			Rcov/ONYaD8Ey+2PGmUNAS+bp7s=
 			</data>
 			<key>hash2</key>
 			<data>
-			eMtpu8zaQ1+lwcSAdwr45KCI1lLPEiWFV6Iu52j0xiM=
+			KKaYulsassDv4Lkoqj5U8OddGER7TTktsP2y6159biE=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0YF7l8w2kkzZsysXlMXHpEI53sg=
+			yDPTsmWJGBvfg5zyZxsPxNaYsrM=
 			</data>
 			<key>hash2</key>
 			<data>
-			CsODOSj7pjAHBSU8LDcClaXF7jcFRw8O/E0VsqwzXcc=
+			HsoTsXMPAqM69vnV00/M9nsewixCdNU4a4a+E+r53aI=
 			</data>
 		</dict>
 		<key>Modules/iOSUnity.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bumPF9HeVg3PBlYwVJ7S02hmx24=
+			MmDIzBdX6pUzSuA7XHSYavGvA8o=
 			</data>
 			<key>hash2</key>
 			<data>
-			wLUeYNYUL8XbJdcCQyJAoIpJkrqOngaulno3xcG8V40=
+			IWTvySA8G8ay3vLXhUMFhzCd1ADRyKmA7jsQmCGKpck=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -319,11 +319,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			q3ZBWNetdEGko70psMGvq3h2wpE=
+			6hjKhj7GXRZ8rcC2g/zCD6QdRIk=
 			</data>
 			<key>hash2</key>
 			<data>
-			yumm/6qUkHnZ5esIZeToIQVt8NyZDGmV44oExrWX2JU=
+			4CbGVsJEd9WEFmt4UkKPiK9Xk0Z9c5NN2I0uWly1um4=
 			</data>
 		</dict>
 	</dict>

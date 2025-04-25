@@ -520,7 +520,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) void (^ _Nullable logger
 + (void)setLoggerMessageClosure:(void (^ _Nullable)(NSString * _Nonnull))newValue;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull sdkFolderPath;)
 + (NSString * _Nonnull)sdkFolderPath SWIFT_WARN_UNUSED_RESULT;
-+ (void)destroySDK;
 + (void)clearKeychain;
 @end
 
@@ -641,14 +640,6 @@ typedef SWIFT_ENUM(NSInteger, DTDLogLevel, open) {
 /// Create events, request statuses
   DTDLogLevelDebug = 5,
 };
-
-
-SWIFT_CLASS("_TtC8iOSUnity12DTDPurchases")
-@interface DTDPurchases : NSObject
-/// Start tracking in-app purchases and subscriptions
-+ (void)startAutoTracking;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
 
 typedef SWIFT_ENUM_NAMED(NSInteger, ReceiptStatus, "DTDReceiptStatus", open) {
 /// Valid

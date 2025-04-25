@@ -15,6 +15,7 @@ namespace DevToDev.Analytics.Editor
     {
         private const string UNITY_ANALYTICS_NAME = "DTDAnalyticsiOSUnity.xcframework";
         private const string PACKAGE_NAME = "com.devtodev.sdk.analytics";
+        private const bool IS_COPPA_ENABLED = false;
 
         [PostProcessBuild(98)]
         public static void OnPostProcessBuild(BuildTarget target, string pathToBuiltProject)
@@ -41,10 +42,11 @@ namespace DevToDev.Analytics.Editor
             var name = UnityEditor.iOS.Xcode.PBXProject.GetUnityTargetName();
             var targetGuid = project.TargetGuidByName(name);
 #endif
-#if DTD_COPPA
-            project.AddFrameworkToProject(targetGuid, "AdSupport.framework", true);
-            project.AddFrameworkToProject(targetGuid, "AppTrackingTransparency.framework", true);
-#endif
+            if (!IS_COPPA_ENABLED)
+            {
+                project.AddFrameworkToProject(targetGuid, "AdSupport.framework", true);
+                project.AddFrameworkToProject(targetGuid, "AppTrackingTransparency.framework", true);
+            }
 
             var frameworkAbsolutePath = Path.Combine("Plugins", "DevToDev", "Analytics", "IOS");
             frameworkAbsolutePath = Path.Combine(Application.dataPath, frameworkAbsolutePath, UNITY_ANALYTICS_NAME);

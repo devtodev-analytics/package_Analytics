@@ -207,11 +207,6 @@ extension iOSUnity.DTDAccrualType : Swift.CustomStringConvertible {
     get
   }
 }
-@objc @_inheritsConvenienceInitializers public class DTDPurchases : ObjectiveC.NSObject {
-  @objc public static func startAutoTracking()
-  @objc override dynamic public init()
-  @objc deinit
-}
 @_inheritsConvenienceInitializers @objc final public class DTDFinishProgressionEventParameters : ObjectiveC.NSObject {
   @objc final public var successfulCompletion: Swift.Bool
   @objc final public var duration: Swift.Int
@@ -413,9 +408,7 @@ extension iOSUnity.DTDAnalytics {
   @objc public static var sdkFolderPath: Swift.String {
     @objc get
   }
-  @objc public static func destroySDK()
   @objc public static func clearKeychain()
-  public static func decompressData(_ data: Foundation.Data) -> Foundation.Data?
 }
 extension iOSUnity.DTDReceiptStatus : Swift.Equatable {}
 extension iOSUnity.DTDReceiptStatus : Swift.Hashable {}

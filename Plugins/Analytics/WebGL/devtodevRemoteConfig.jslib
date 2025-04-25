@@ -1,5 +1,5 @@
 mergeInto(LibraryManager.library, {
-  dtd_setDefaults: function (jsonString) {
+  setDefaults: function (jsonString) {
     try {
       var defaults = JSON.parse(UTF8ToString(jsonString));
       window.devtodev.remoteConfig.defaults = defaults;
@@ -8,7 +8,7 @@ mergeInto(LibraryManager.library, {
       _logger.error("Execution of the setDefaults method was canceled!");
     }
   },
-  dtd_getDefaults: function () {
+  getDefaults: function () {
     try {
       var result = window.devtodev.remoteConfig.defaults;
       if (typeof result === "undefined") return null;
@@ -22,7 +22,7 @@ mergeInto(LibraryManager.library, {
       _logger.error("Execution of the getDefaults method was canceled!");
     }
   },
-  dtd_applyConfig: function () {
+  applyConfig: function () {
     try {
       window.devtodev.remoteConfig.applyConfig();
     } catch (e) {
@@ -30,7 +30,7 @@ mergeInto(LibraryManager.library, {
       _logger.error("Execution of the applyConfig method was canceled!");
     }
   },
-  dtd_resetConfig: function () {
+  resetConfig: function () {
     try {
       window.devtodev.remoteConfig.resetConfig();
     } catch (e) {
@@ -38,7 +38,7 @@ mergeInto(LibraryManager.library, {
       _logger.error("Execution of the resetConfig method was canceled!");
     }
   },
-  dtd_getConfigWaiting: function () {
+  getConfigWaiting: function () {
     try {
       var json = JSON.stringify(
         window.devtodev.remoteConfig.remoteConfigWaiting
@@ -56,7 +56,7 @@ mergeInto(LibraryManager.library, {
       );
     }
   },
-  dtd_setConfigWaiting: function (time) {
+  setConfigWaiting: function (time) {
     try {
       window.devtodev.remoteConfig.remoteConfigWaiting = time;
     } catch (e) {
@@ -68,7 +68,7 @@ mergeInto(LibraryManager.library, {
       );
     }
   },
-  dtd_getGroupWaiting: function () {
+  getGroupWaiting: function () {
     try {
       var json = JSON.stringify(
         window.devtodev.remoteConfig.groupDefinitionWaiting
@@ -86,7 +86,7 @@ mergeInto(LibraryManager.library, {
       );
     }
   },
-  dtd_setGroupWaiting: function (time) {
+  setGroupWaiting: function (time) {
     try {
       window.devtodev.remoteConfig.groupDefinitionWaiting = time;
     } catch (e) {
@@ -98,7 +98,7 @@ mergeInto(LibraryManager.library, {
       );
     }
   },
-  dtd_cacheTestExperiment: function () {
+  cacheTestExperiment: function () {
     try {
       window.devtodev.remoteConfig.cacheTestExperiment();
     } catch (e) {
@@ -110,7 +110,7 @@ mergeInto(LibraryManager.library, {
       );
     }
   },
-  dtd_remoteConfigGetConfig: function () {
+  remoteConfigGetConfig: function () {
     try {
       var result = window.devtodev.remoteConfig.config;
       if (typeof result === "undefined") return null;
