@@ -3,7 +3,7 @@ var devtodevPlugin = {
      * Get IndexedDB availability
      * @return bool
      */
-    isIndexedDBAvailable: function() {
+    dtd_isIndexedDBAvailable: function() {
         var isAvailable = false;
         window.indexedDB = window.indexedDB ||
             window.mozIndexedDB ||
@@ -19,7 +19,7 @@ var devtodevPlugin = {
      * Get storage availability
      * @return bool
      */
-    isStorageAvailable: function() {
+    dtd_isStorageAvailable: function() {
         try {
             const key = "__example_key__";
             window.localStorage.setItem(key, key);
@@ -34,7 +34,7 @@ var devtodevPlugin = {
      * @param key string
      * @return void
      */
-    removeItem: function(key) {
+    dtd_removeItem: function(key) {
         try {
             window.localStorage.removeItem(UTF8ToString(key));
         } catch (e) {}
@@ -46,7 +46,7 @@ var devtodevPlugin = {
      * @param value string
      * @return void
      */
-    setItem: function(key, value) {
+    dtd_setItem: function(key, value) {
         try {
             window.localStorage.setItem(UTF8ToString(key), UTF8ToString(value));
         } catch (e) {}
@@ -56,7 +56,7 @@ var devtodevPlugin = {
      * @param key string
      * @return object || null
      */
-    getItem: function(key) {
+    dtd_getItem: function(key) {
         try {
             var result = window.localStorage.getItem(UTF8ToString(key));
             result = result === 'undefined' ? null : result;
@@ -74,7 +74,7 @@ var devtodevPlugin = {
      * @param key string
      * @return bool
      */
-    isExistItem: function(key) {
+    dtd_isExistItem: function(key) {
         try {
             var result = window.localStorage.getItem(key);
             result = result === 'undefined' ? false : true;

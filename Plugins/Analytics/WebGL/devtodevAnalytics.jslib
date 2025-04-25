@@ -1,5 +1,5 @@
 var DevToDev = {
-  migrateByUser: function (appKey, migrationData) {
+  dtd_migrateByUser: function (appKey, migrationData) {
     try {
       window.devtodev.migrationUser(
         UTF8ToString(appKey),
@@ -10,7 +10,7 @@ var DevToDev = {
       _logger.error("Execution of the migration method was canceled!");
     }
   },
-  migrateByDevice: function (appKey, migrationData) {
+  dtd_migrateByDevice: function (appKey, migrationData) {
     try {
       window.devtodev.migrationDevice(
         UTF8ToString(appKey),
@@ -21,7 +21,7 @@ var DevToDev = {
       _logger.error("Execution of the migration method was canceled!");
     }
   },
-  initialize: function (appKey) {
+  dtd_initialize: function (appKey) {
     try {
       window.devtodev.initialize(UTF8ToString(appKey), {});
     } catch (e) {
@@ -29,7 +29,7 @@ var DevToDev = {
       _logger.error("Execution of the initialize method was canceled!");
     }
   },
-  initializeWithConfig: function (
+  dtd_initializeWithConfig: function (
     appKey,
     userId,
     currentLevel,
@@ -59,7 +59,7 @@ var DevToDev = {
       _logger.error("Execution of the initialize method was canceled!");
     }
   },
-  initializeWithAbTestWithConfig: function (
+  dtd_initializeWithAbTestWithConfig: function (
     appKey,
     userId,
     currentLevel,
@@ -83,21 +83,21 @@ var DevToDev = {
         }
       }
       var callbacks = {
-        onReceived: function (result) {
+        dtd_onReceived: function (result) {
           try {
             sendMessage("OnReceivedCallback", result.toString());
           } catch (error) {
             console.log("onReceived error: " + error);
           }
         },
-        onPrepareToChange: function () {
+        dtd_onPrepareToChange: function () {
           try {
             sendMessage("OnPrepareToChangeCallback");
           } catch (error) {
             console.log("onPrepareToChange error: " + error);
           }
         },
-        onChanged: function (result, error) {
+        dtd_onChanged: function (result, error) {
           try {
             var onChangedResult = {};
             onChangedResult["result"] = result.toString();
@@ -119,24 +119,24 @@ var DevToDev = {
       _logger.error("Execution of the initialize method was canceled!");
     }
   },
-  initializeWithAbTest: function (appKey) {
+  dtd_initializeWithAbTest: function (appKey) {
     try {
       var callbacks = {
-        onReceived: function (result) {
+        dtd_onReceived: function (result) {
           try {
             sendMessage("OnReceivedCallback", result.toString());
           } catch (error) {
             console.log("onReceived error: " + error);
           }
         },
-        onPrepareToChange: function () {
+        dtd_onPrepareToChange: function () {
           try {
             sendMessage("OnPrepareToChangeCallback");
           } catch (error) {
             console.log("onPrepareToChange error: " + error);
           }
         },
-        onChanged: function (result, error) {
+        dtd_onChanged: function (result, error) {
           try {
             var onChangedResult = {};
             onChangedResult["result"] = result.toString();
@@ -154,7 +154,7 @@ var DevToDev = {
       _logger.error("Execution of the initialize method was canceled!");
     }
   },
-  adImpression: function (network, revenue, placement, unit) {
+  dtd_adImpression: function (network, revenue, placement, unit) {
     try {
       window.devtodev.adImpression(
         UTF8ToString(network),
@@ -167,7 +167,7 @@ var DevToDev = {
       _logger.error("Execution of the adImpression method was canceled!");
     }
   },
-  setSdkCodeVersion: function (version) {
+  dtd_setSdkCodeVersion: function (version) {
     try {
       window.devtodev.setSdkCodeVersion(version);
     } catch (e) {
@@ -175,7 +175,7 @@ var DevToDev = {
       _logger.error("Execution of the setSdkCodeVersion method was canceled!");
     }
   },
-  setSdkVersion: function (version) {
+  dtd_setSdkVersion: function (version) {
     try {
       window.devtodev.setSDKVersion(UTF8ToString(version));
     } catch (e) {
@@ -183,7 +183,7 @@ var DevToDev = {
       _logger.error("Execution of the setSdkVersion method was canceled!");
     }
   },
-  getSdkVersion: function () {
+  dtd_getSdkVersion: function () {
     try {
       var result = window.devtodev.getSDKVersion();
       if (typeof result === "undefined") return null;
@@ -197,7 +197,7 @@ var DevToDev = {
       return null;
     }
   },
-  getAppVersion: function () {
+  dtd_getAppVersion: function () {
     try {
       var result = window.devtodev.getAppVersion();
       if (typeof result === "undefined") return null;
@@ -211,7 +211,7 @@ var DevToDev = {
       return null;
     }
   },
-  setAppVersion: function (version) {
+  dtd_setAppVersion: function (version) {
     try {
       window.devtodev.setAppVersion(UTF8ToString(version));
     } catch (e) {
@@ -219,7 +219,7 @@ var DevToDev = {
       _logger.error("Execution of the setAppVersion method was canceled!");
     }
   },
-  getUserId: function () {
+  dtd_getUserId: function () {
     try {
       var result = window.devtodev.getUserId();
       if (typeof result === "undefined") return null;
@@ -233,7 +233,7 @@ var DevToDev = {
       return null;
     }
   },
-  setUserId: function (userId) {
+  dtd_setUserId: function (userId) {
     try {
       window.devtodev.setUserId(UTF8ToString(userId));
     } catch (e) {
@@ -241,7 +241,7 @@ var DevToDev = {
       _logger.error("Execution of the setUserId method was canceled!");
     }
   },
-  getCurrentLevel: function () {
+  dtd_getCurrentLevel: function () {
     try {
       var result = window.devtodev.getCurrentLevel();
       if (typeof result === "undefined") return null;
@@ -255,7 +255,7 @@ var DevToDev = {
       return 0;
     }
   },
-  setCurrentLevel: function (level) {
+  dtd_setCurrentLevel: function (level) {
     try {
       window.devtodev.setCurrentLevel(level);
     } catch (e) {
@@ -263,7 +263,7 @@ var DevToDev = {
       _logger.error("Execution of the setCurrentLevel method was canceled!");
     }
   },
-  getLogLevel: function () {
+  dtd_getLogLevel: function () {
     try {
       var result = window.devtodev.logLevel;
       if (typeof result === "undefined") return null;
@@ -277,7 +277,7 @@ var DevToDev = {
       return null;
     }
   },
-  setLogLevel: function (logLevel) {
+  dtd_setLogLevel: function (logLevel) {
     try {
       window.devtodev.logLevel = UTF8ToString(logLevel);
     } catch (e) {
@@ -285,7 +285,7 @@ var DevToDev = {
       _logger.error("Execution of the setLogLevel method was canceled!");
     }
   },
-  getTrackingAvailability: function () {
+  dtd_getTrackingAvailability: function () {
     try {
       return window.devtodev.getTrackingAvailability();
     } catch (e) {
@@ -298,7 +298,7 @@ var DevToDev = {
       return true;
     }
   },
-  setTrackingAvailability: function (value) {
+  dtd_setTrackingAvailability: function (value) {
     try {
       window.devtodev.setTrackingAvailability(!!value);
     } catch (e) {
@@ -310,7 +310,7 @@ var DevToDev = {
       );
     }
   },
-  referrer: function (value) {
+  dtd_referrer: function (value) {
     try {
       if (value == null || UTF8ToString(value).length == 0) {
         window.devtodev.referrer({});
@@ -322,7 +322,7 @@ var DevToDev = {
       _logger.error("Execution of the referrer method was canceled!");
     }
   },
-  virtualCurrencyPayment: function (
+  dtd_virtualCurrencyPayment: function (
     purchaseId,
     purchaseType,
     purchaseAmount,
@@ -351,7 +351,7 @@ var DevToDev = {
       );
     }
   },
-  currencyAccrual: function (
+  dtd_currencyAccrual: function (
     currencyName,
     currencyAmount,
     source,
@@ -369,7 +369,7 @@ var DevToDev = {
       _logger.error("Execution of the currencyAccrual method was canceled!");
     }
   },
-  realCurrencyPayment: function (orderId, price, productId, currencyCode) {
+  dtd_realCurrencyPayment: function (orderId, price, productId, currencyCode) {
     try {
       window.devtodev.realCurrencyPayment(
         UTF8ToString(orderId),
@@ -386,10 +386,10 @@ var DevToDev = {
       );
     }
   },
-  tutorial: function (step) {
+  dtd_tutorial: function (step) {
     window.devtodev.tutorial(step);
   },
-  socialNetworkConnect: function (name) {
+  dtd_socialNetworkConnect: function (name) {
     try {
       window.devtodev.socialNetworkConnect(UTF8ToString(name));
     } catch (e) {
@@ -401,7 +401,7 @@ var DevToDev = {
       );
     }
   },
-  socialNetworkPost: function (name, reason) {
+  dtd_socialNetworkPost: function (name, reason) {
     try {
       window.devtodev.socialNetworkPost(
         UTF8ToString(name),
@@ -412,10 +412,10 @@ var DevToDev = {
       _logger.error("Execution of the socialNetworkPost method was canceled!");
     }
   },
-  sendBufferedEvents: function () {
+  dtd_sendBufferedEvents: function () {
     window.devtodev.sendBufferedEvents();
   },
-  startProgressionEvent: function (val, valJSON) {
+  dtd_startProgressionEvent: function (val, valJSON) {
     try {
       if (valJSON == null || UTF8ToString(valJSON).length == 0) {
         window.devtodev.startProgressionEvent(UTF8ToString(val), {});
@@ -438,7 +438,7 @@ var DevToDev = {
       );
     }
   },
-  finishProgressionEvent: function (val, valJSON) {
+  dtd_finishProgressionEvent: function (val, valJSON) {
     try {
       if (valJSON == null || UTF8ToString(valJSON).length == 0) {
         window.devtodev.finishProgressionEvent(UTF8ToString(val), {});
@@ -468,7 +468,7 @@ var DevToDev = {
       );
     }
   },
-  customEvent: function (name, params) {
+  dtd_customEvent: function (name, params) {
     try {
       if (params == null || UTF8ToString(params).length == 0) {
         window.devtodev.customEvent(UTF8ToString(name));
@@ -486,7 +486,7 @@ var DevToDev = {
       _logger.error("Execution of the customEvent method was canceled!");
     }
   },
-  replaceUserId: function (previousUserId, userId) {
+  dtd_replaceUserId: function (previousUserId, userId) {
     try {
       window.devtodev.replaceUserId(
         UTF8ToString(previousUserId),
@@ -497,7 +497,7 @@ var DevToDev = {
       _logger.error("Execution of the replaceUserId method was canceled!");
     }
   },
-  levelUp: function (level) {
+  dtd_levelUp: function (level) {
     try {
       window.devtodev.levelUp(level);
     } catch (e) {
@@ -505,7 +505,7 @@ var DevToDev = {
       _logger.error("Execution of the levelUp method was canceled!");
     }
   },
-  levelUpWithResources: function (
+  dtd_levelUpWithResources: function (
     level,
     jsonBalance,
     jsonSpent,
@@ -523,7 +523,7 @@ var DevToDev = {
       _logger.error("Execution of the levelUp method was canceled!");
     }
   },
-  currentBalance: function (jsonString) {
+  dtd_currentBalance: function (jsonString) {
     try {
       if (jsonString == null || UTF8ToString(jsonString).length == 0) {
         window.devtodev.currentBalance(null);
@@ -537,13 +537,13 @@ var DevToDev = {
       _logger.error("Execution of the currentBalance method was canceled!");
     }
   },
-  setTestProxyUrl: function (url) {
+  dtd_setTestProxyUrl: function (url) {
     window.devtodev.testProxyUrl = UTF8ToString(url);
   },
-  setTestCustomUrl: function (url) {
+  dtd_setTestCustomUrl: function (url) {
     window.devtodev.testCustomUrl = UTF8ToString(url);
   },
-  getTestProxyUrl: function (url) {
+  dtd_getTestProxyUrl: function (url) {
     var result = window.devtodev.testProxyUrl;
     if (typeof result === "undefined") return null;
     var buffer = _malloc(lengthBytesUTF8(result) + 1);
@@ -551,7 +551,7 @@ var DevToDev = {
     stringToUTF8(result, buffer, bufferSize);
     return buffer;
   },
-  getTestCustomUrl: function (url) {
+  dtd_getTestCustomUrl: function (url) {
     var result = window.devtodev.testCustomUrl;
     if (typeof result === "undefined") return null;
     var buffer = _malloc(lengthBytesUTF8(result) + 1);
@@ -559,7 +559,7 @@ var DevToDev = {
     stringToUTF8(result, buffer, bufferSize);
     return buffer;
   },
-  testLogs: function () {
+  dtd_testLogs: function () {
     window.devtodev.testLogs();
   },
 };
