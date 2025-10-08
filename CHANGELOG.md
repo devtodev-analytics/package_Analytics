@@ -1,4 +1,9 @@
-## [3.9.2] - 2025-08-11
+## [3.9.3] - 2025-10-07
+
+- Add support for billing v8.0.0 for Android platform
+- Fixed AntiCheat verification for the Android platform
+
+## [3.9.2] - 2025-08-08
 
 - Added support for 16 KB page sizes for the Android platform
 - Fixed "Referral not connected" exception for the Android platform
