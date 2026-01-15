@@ -1,6 +1,14 @@
+## [3.10.0] - 2026-01-14
+
+- Added Remote configs for Android, IOS and WebGL platforms
+
+## [3.9.4] - 2026-01-08
+
+- Subscriptions module: added support for Unity IAP v5.1
+
 ## [3.9.3] - 2025-10-07
 
-- Add support for billing v8.0.0 for Android platform
+- Added support for billing v8.0.0 for Android platform
 - Fixed AntiCheat verification for the Android platform
 
 ## [3.9.2] - 2025-08-08

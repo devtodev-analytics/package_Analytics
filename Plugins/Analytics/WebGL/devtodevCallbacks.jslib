@@ -1,39 +1,29 @@
 mergeInto(LibraryManager.library, {
-  $instance: null,
-  $getInstance: function () {
-    const instance =
-      typeof gameInstance !== "undefined"
-        ? gameInstance
-        : typeof unityInstance !== "undefined"
-        ? unityInstance
-        : typeof myGameInstance !== "undefined"
-        ? myGameInstance
-        : null;
-    return instance;
+  dtd_setIdentifierCallback__deps: [
+    "$identifierCallback",
+    "$dtd_sendMessage",
+    "$dtd_getUnityInstance",
+  ],
+  dtd_setInitializationCompleteCallback__deps: [
+    "$initializationCompleteCallback",
+    "$dtd_sendMessage",
+    "$dtd_getUnityInstance",
+  ],
+  dtd_setLoggerCallback__deps: [
+    "$loggerCallback",
+    "$dtd_sendMessage",
+    "$dtd_getUnityInstance",
+  ],
+  dtd_setCountingTypeListener__deps: [
+    "$countingTypeListener",
+    "$dtd_sendMessage",
+    "$dtd_getUnityInstance",
+  ],
+  dtd_setCountingTypeListener: function () {
+    window.devtodev.setCountingTypeListener(countingTypeListener);
   },
-  $dtd_sendMessage: function (method, message) {
-    const instance = getInstance();
-    if (instance && instance.SendMessage) {
-      try {
-        instance.SendMessage(
-          "[devtodev_AsyncOperationDispatcher]",
-          method,
-          message
-        );
-      } catch (e) {
-        console.log("[DevToDev] Unity SendMessage Error:", e);
-      }
-    } else if (typeof SendMessage !== "undefined") {
-      try {
-        SendMessage("[devtodev_AsyncOperationDispatcher]", method, message);
-      } catch (e) {
-        console.log("[DevToDev] SendMessage Error:", e);
-      }
-    } else {
-      console.log(
-        "[DevToDev] Error: Unable to find Unity instance. Modify your WebGL template to create unityInstance variable."
-      );
-    }
+  $countingTypeListener: function (countingType) {
+    dtd_sendMessage("OnCountingTypeChanged", countingType.toString());
   },
   $identifierCallback: function (id) {
     dtd_sendMessage("OnIdentifierReceived", id.toString());
@@ -56,22 +46,4 @@ mergeInto(LibraryManager.library, {
       initializationCompleteCallback
     );
   },
-  dtd_setIdentifierCallback__deps: [
-    "$instance",
-    "$getInstance",
-    "$identifierCallback",
-    "$dtd_sendMessage",
-  ],
-  dtd_setInitializationCompleteCallback__deps: [
-    "$instance",
-    "$getInstance",
-    "$initializationCompleteCallback",
-    "$dtd_sendMessage",
-  ],
-  dtd_setLoggerCallback__deps: [
-    "$instance",
-    "$getInstance",
-    "$loggerCallback",
-    "$dtd_sendMessage",
-  ],
 });

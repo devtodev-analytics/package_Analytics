@@ -63,6 +63,16 @@ import os
   }
   @objc deinit
 }
+@_hasMissingDesignatedInitializers @objc final public class DTDRemoteConfigChangeKey : ObjectiveC.NSObject {
+  @objc final public let key: Swift.String
+  @objc final public let source: DTDRemoteConfigSource
+  @objc deinit
+}
+extension DTDRemoteConfigChangeKey {
+  @objc override final public var description: Swift.String {
+    @objc get
+  }
+}
 @objc(ReceiptStatus) public enum DTDReceiptStatus : Swift.Int {
   case receiptValid
   case receiptNotValid
@@ -102,10 +112,11 @@ extension DTDTrackingStatus : Swift.CustomStringConvertible {
     get
   }
 }
-@objc public enum DTDRemoteConfigSource : Swift.Int {
-  case empty = 0
-  case remote = 1
-  case defaults = 2
+@objc public enum DTDRemoteConfigSource : Swift.Int, Swift.Codable, Swift.RawRepresentable {
+  case undefined = 0
+  case defaults = 1
+  case remote = 2
+  case abTest = 3
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -161,10 +172,6 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
 }
 @_inheritsConvenienceInitializers @objc final public class DTDRemoteConfig : ObjectiveC.NSObject {
   @objc override dynamic public init()
-  @objc public static var remoteConfigWaiting: Swift.Double {
-    @objc get
-    @objc set
-  }
   @objc public static var groupDefinitionWaiting: Swift.Double {
     @objc get
     @objc set
@@ -179,6 +186,7 @@ extension DTDRemoteConfigSource : Swift.CustomStringConvertible {
   @objc public static func applyConfig()
   @objc public static func cacheTestExperiment()
   @objc public static func resetConfig()
+  @objc public static func invalidateActiveConfig()
   @objc deinit
 }
 @_inheritsConvenienceInitializers @objc final public class DTDCustomEventParameters : ObjectiveC.NSObject {
@@ -227,7 +235,6 @@ extension DTDAccrualType : Swift.CustomStringConvertible {
   @objc(hasKey:) final public func hasKey(_ key: Swift.String) -> Swift.Bool
   @objc final public subscript(key: Swift.String) -> DTDRemoteConfigValue {
     @objc get
-    @objc set
   }
   @objc deinit
 }
@@ -248,8 +255,18 @@ extension DTDRemoteConfigCollection : Swift.Collection {
   public typealias Iterator = Swift.IndexingIterator<DTDRemoteConfigCollection>
   public typealias SubSequence = Swift.Slice<DTDRemoteConfigCollection>
 }
-extension DTDRemoteConfigCollection {
-  @objc final public func getRawConfig() -> [Swift.String : DTDRemoteConfigValue]
+extension Swift.Array {
+  @inlinable internal var isNotEmpty: Swift.Bool {
+    get { return !self.isEmpty }
+  }
+}
+extension Swift.Dictionary {
+  @inlinable internal var isNotEmpty: Swift.Bool {
+    get { return !self.isEmpty }
+  }
+}
+@objc public protocol UserCountingListener {
+  @objc func onChanged(userCounting: Swift.Bool)
 }
 @objc public enum DTDLogLevel : Swift.Int, Swift.CaseIterable {
   case unknown
@@ -271,6 +288,10 @@ extension DTDRemoteConfigCollection {
     get
   }
 }
+@_hasMissingDesignatedInitializers @objc final public class DTDRemoteConfigUpdate : ObjectiveC.NSObject {
+  @objc final public let keys: [DTDRemoteConfigChangeKey]
+  @objc deinit
+}
 @objc public enum DTDRemoteConfigChangeResult : Swift.Int {
   case failure = 0
   case success = 1
@@ -285,28 +306,11 @@ extension DTDRemoteConfigChangeResult : Swift.CustomStringConvertible {
     get
   }
 }
-@objc public enum DTDRemoteConfigReceiveResult : Swift.Int {
-  case failure = 0
-  case success = 1
-  case empty = 2
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
-  public var description: Swift.String {
-    get
-  }
-}
 @objc public protocol DTDIdentifiersListener {
   @objc optional func didReceiveDevtodevId(with devtodevId: Swift.Int64)
 }
 @objc public protocol DTDRemoteConfigListener {
-  @objc(onReceivedResult:) func onReceived(result: DTDRemoteConfigReceiveResult)
-  @objc func onPrepareToChange()
-  @objc(onChangedResult:error:) func onChanged(result: DTDRemoteConfigChangeResult, error: (any Swift.Error)?)
+  @objc(onChangedResult:) func onChanged(update: DTDRemoteConfigUpdate)
 }
 @objc public class DTDSocialNetwork : ObjectiveC.NSObject {
   @objc public init(name: Swift.String)
@@ -326,6 +330,11 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
   @objc public static let renren: DTDSocialNetwork
   @objc public static let tumblr: DTDSocialNetwork
   @objc deinit
+}
+extension Swift.String {
+  @inlinable internal var isNotEmpty: Swift.Bool {
+    get { return !self.isEmpty }
+  }
 }
 @_inheritsConvenienceInitializers @objc public class DTDAntiCheat : ObjectiveC.NSObject {
   @objc public static func verifyPayment(receiptString: Swift.String, completionHandler: @escaping (DTDVerifyResponse) -> Swift.Void)
@@ -373,8 +382,8 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
   @objc public static func currentBalance(balance: [Swift.String : Swift.Int])
   @objc(applicationKey:configuration:) public static func initialize(applicationKey: Swift.String, configuration: DTDAnalyticsConfiguration)
   @objc(applicationKey:) public static func initialize(applicationKey: Swift.String)
-  @objc(applicationKey:configuration:abConfigListener:) public static func initializeWithAbTest(applicationKey: Swift.String, configuration: DTDAnalyticsConfiguration, abConfigListener: any DTDRemoteConfigListener)
-  @objc(applicationKey:abConfigListener:) public static func initializeWithAbTest(applicationKey: Swift.String, abConfigListener: any DTDRemoteConfigListener)
+  @objc(applicationKey:configuration:abConfigListener:) public static func initializeWithRemoteConfig(applicationKey: Swift.String, configuration: DTDAnalyticsConfiguration, abConfigListener: any DTDRemoteConfigListener)
+  @objc(applicationKey:abConfigListener:) public static func initializeWithRemoteConfig(applicationKey: Swift.String, abConfigListener: any DTDRemoteConfigListener)
   @objc(customEvent:) public static func customEvent(eventName: Swift.String)
   @objc(customEvent:withParameters:) public static func customEvent(eventName: Swift.String, parameters: DTDCustomEventParameters)
   @objc public static func sendBufferedEvents()
@@ -402,6 +411,10 @@ extension DTDRemoteConfigReceiveResult : Swift.CustomStringConvertible {
 }
 extension DTDAnalytics {
   @objc public static func testLogs()
+  @objc public static func getActiveUserIdInternal() -> Swift.String?
+  @objc public static func getUsersDataInternal() -> [Swift.String : Swift.Int]?
+  @objc public static func getCountingFlagInternal() -> Swift.Bool
+  @objc public static func getRemoteConfigInternal() -> [Swift.String : Foundation.NSDictionary]?
   @objc public static func setTestProxyUrl(url: Swift.String)
   @objc public static func getTestProxyUrl(urlHandler: @escaping (Swift.String) -> Swift.Void)
   @objc public static func setTestCustomUrl(url: Swift.String)
@@ -413,9 +426,15 @@ extension DTDAnalytics {
   @objc public static var sdkFolderPath: Swift.String {
     @objc get
   }
+  @objc public static var remotesFolderPath: Swift.String {
+    @objc get
+  }
   @objc public static func destroySDK()
   @objc public static func clearKeychain()
   public static func decompressData(_ data: Foundation.Data) -> Foundation.Data?
+}
+extension DTDAnalytics {
+  @objc public static func setUserCountingListener(_ listener: any UserCountingListener)
 }
 extension DTDReceiptStatus : Swift.Equatable {}
 extension DTDReceiptStatus : Swift.Hashable {}
@@ -425,7 +444,6 @@ extension DTDTrackingStatus : Swift.Hashable {}
 extension DTDTrackingStatus : Swift.RawRepresentable {}
 extension DTDRemoteConfigSource : Swift.Equatable {}
 extension DTDRemoteConfigSource : Swift.Hashable {}
-extension DTDRemoteConfigSource : Swift.RawRepresentable {}
 extension DTDAccrualType : Swift.Equatable {}
 extension DTDAccrualType : Swift.Hashable {}
 extension DTDAccrualType : Swift.RawRepresentable {}
@@ -435,6 +453,3 @@ extension DTDLogLevel : Swift.RawRepresentable {}
 extension DTDRemoteConfigChangeResult : Swift.Equatable {}
 extension DTDRemoteConfigChangeResult : Swift.Hashable {}
 extension DTDRemoteConfigChangeResult : Swift.RawRepresentable {}
-extension DTDRemoteConfigReceiveResult : Swift.Equatable {}
-extension DTDRemoteConfigReceiveResult : Swift.Hashable {}
-extension DTDRemoteConfigReceiveResult : Swift.RawRepresentable {}

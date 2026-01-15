@@ -6,8 +6,12 @@ var DevToDev = {
         UTF8ToString(migrationData)
       );
     } catch (e) {
-      _logger.error("In the migration method error has occurred: " + e);
-      _logger.error("Execution of the migration method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the migration method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the migration method was canceled!");
     }
   },
   dtd_migrateByDevice: function (appKey, migrationData) {
@@ -17,16 +21,24 @@ var DevToDev = {
         UTF8ToString(migrationData)
       );
     } catch (e) {
-      _logger.error("In the migration method error has occurred: " + e);
-      _logger.error("Execution of the migration method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the migration method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the migration method was canceled!");
     }
   },
   dtd_initialize: function (appKey) {
     try {
       window.devtodev.initialize(UTF8ToString(appKey), {});
     } catch (e) {
-      _logger.error("In the initialize method error has occurred: " + e);
-      _logger.error("Execution of the initialize method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the initialize method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the initialize method was canceled!");
     }
   },
   dtd_initializeWithConfig: function (
@@ -55,11 +67,15 @@ var DevToDev = {
 
       window.devtodev.initialize(UTF8ToString(appKey), args);
     } catch (e) {
-      _logger.error("In the initialize method error has occurred: " + e);
-      _logger.error("Execution of the initialize method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the initialize method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the initialize method was canceled!");
     }
   },
-  dtd_initializeWithAbTestWithConfig: function (
+  dtd_initializeWithRemoteConfigWithConfig: function (
     appKey,
     userId,
     currentLevel,
@@ -82,76 +98,50 @@ var DevToDev = {
           args["trackingAvailability"] = false;
         }
       }
-      var callbacks = {
-        dtd_onReceived: function (result) {
-          try {
-            sendMessage("OnReceivedCallback", result.toString());
-          } catch (error) {
-            console.log("onReceived error: " + error);
-          }
-        },
-        dtd_onPrepareToChange: function () {
-          try {
-            sendMessage("OnPrepareToChangeCallback");
-          } catch (error) {
-            console.log("onPrepareToChange error: " + error);
-          }
-        },
-        dtd_onChanged: function (result, error) {
-          try {
-            var onChangedResult = {};
-            onChangedResult["result"] = result.toString();
-            onChangedResult["error"] = error;
-            var json = JSON.stringify(onChangedResult);
-            sendMessage("OnChangedCallback", json);
-          } catch (e) {
-            console.log("onChanged error: " + e);
-          }
+      var unity = {
+        onChanged: function (result) {
+          console.log("Callback result:", JSON.stringify(result, null, 2));
+          dtd_sendMessage("OnChangedCallback", JSON.stringify(result));
         },
       };
-      window.devtodev.initializeWithAbTest(
+      window.devtodev.initializeWithRemoteConfig(
         UTF8ToString(appKey),
         args,
-        callbacks
+        {},
+        unity
       );
     } catch (e) {
-      _logger.error("In the initialize method error has occurred: " + e);
-      _logger.error("Execution of the initialize method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the initialize method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the initialize method was canceled!");
     }
   },
-  dtd_initializeWithAbTest: function (appKey) {
+  dtd_initializeWithRemoteConfig: function (appKey) {
     try {
-      var callbacks = {
-        dtd_onReceived: function (result) {
-          try {
-            sendMessage("OnReceivedCallback", result.toString());
-          } catch (error) {
-            console.log("onReceived error: " + error);
-          }
-        },
-        dtd_onPrepareToChange: function () {
-          try {
-            sendMessage("OnPrepareToChangeCallback");
-          } catch (error) {
-            console.log("onPrepareToChange error: " + error);
-          }
-        },
-        dtd_onChanged: function (result, error) {
-          try {
-            var onChangedResult = {};
-            onChangedResult["result"] = result.toString();
-            onChangedResult["error"] = error;
-            var json = JSON.stringify(onChangedResult);
-            sendMessage("OnChangedCallback", json);
-          } catch (e) {
-            console.log("onChanged error: " + e);
-          }
+      console.log("dtd_initializeWithRemoteConfig: " + appKey);
+      var unity = {
+        onChanged: function (result) {
+          console.log("Callback result:", JSON.stringify(result, null, 2));
+          dtd_sendMessage("OnChangedCallback", JSON.stringify(result));
         },
       };
-      window.devtodev.initializeWithAbTest(UTF8ToString(appKey), {}, callbacks);
+
+      window.devtodev.initializeWithRemoteConfig(
+        UTF8ToString(appKey),
+        {},
+        {},
+        unity
+      );
     } catch (e) {
-      _logger.error("In the initialize method error has occurred: " + e);
-      _logger.error("Execution of the initialize method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the initialize method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the initialize method was canceled!");
     }
   },
   dtd_adImpression: function (network, revenue, placement, unit) {
@@ -163,24 +153,36 @@ var DevToDev = {
         UTF8ToString(unit)
       );
     } catch (e) {
-      _logger.error("In the adImpression method error has occurred: " + e);
-      _logger.error("Execution of the adImpression method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the adImpression method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the adImpression method was canceled!");
     }
   },
   dtd_setSdkCodeVersion: function (version) {
     try {
       window.devtodev.setSdkCodeVersion(version);
     } catch (e) {
-      _logger.error("In the setSdkCodeVersion method error has occurred: " + e);
-      _logger.error("Execution of the setSdkCodeVersion method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the setSdkCodeVersion method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the setSdkCodeVersion method was canceled!");
     }
   },
   dtd_setSdkVersion: function (version) {
     try {
       window.devtodev.setSDKVersion(UTF8ToString(version));
     } catch (e) {
-      _logger.error("In the setSdkVersion method error has occurred: " + e);
-      _logger.error("Execution of the setSdkVersion method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the setSdkVersion method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the setSdkVersion method was canceled!");
     }
   },
   dtd_getSdkVersion: function () {
@@ -192,8 +194,12 @@ var DevToDev = {
       stringToUTF8(result, buffer, bufferSize);
       return buffer;
     } catch (e) {
-      _logger.error("In the getSdkVersion method error has occurred: " + e);
-      _logger.error("Execution of the getSdkVersion method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the getSdkVersion method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the getSdkVersion method was canceled!");
       return null;
     }
   },
@@ -206,8 +212,12 @@ var DevToDev = {
       stringToUTF8(result, buffer, bufferSize);
       return buffer;
     } catch (e) {
-      _logger.error("In the getAppVersion method error has occurred: " + e);
-      _logger.error("Execution of the getAppVersion method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the getAppVersion method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the getAppVersion method was canceled!");
       return null;
     }
   },
@@ -215,8 +225,12 @@ var DevToDev = {
     try {
       window.devtodev.setAppVersion(UTF8ToString(version));
     } catch (e) {
-      _logger.error("In the setAppVersion method error has occurred: " + e);
-      _logger.error("Execution of the setAppVersion method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the setAppVersion method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the setAppVersion method was canceled!");
     }
   },
   dtd_getUserId: function () {
@@ -228,8 +242,12 @@ var DevToDev = {
       stringToUTF8(result, buffer, bufferSize);
       return buffer;
     } catch (e) {
-      _logger.error("In the getUserId method error has occurred: " + e);
-      _logger.error("Execution of the getUserId method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the getUserId method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the getUserId method was canceled!");
       return null;
     }
   },
@@ -237,8 +255,12 @@ var DevToDev = {
     try {
       window.devtodev.setUserId(UTF8ToString(userId));
     } catch (e) {
-      _logger.error("In the setUserId method error has occurred: " + e);
-      _logger.error("Execution of the setUserId method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the setUserId method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the setUserId method was canceled!");
     }
   },
   dtd_getCurrentLevel: function () {
@@ -250,8 +272,12 @@ var DevToDev = {
       stringToUTF8(result, buffer, bufferSize);
       return buffer;
     } catch (e) {
-      _logger.error("In the getCurrentLevel method error has occurred: " + e);
-      _logger.error("Execution of the getCurrentLevel method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the getCurrentLevel method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the getCurrentLevel method was canceled!");
       return 0;
     }
   },
@@ -259,8 +285,12 @@ var DevToDev = {
     try {
       window.devtodev.setCurrentLevel(level);
     } catch (e) {
-      _logger.error("In the setCurrentLevel method error has occurred: " + e);
-      _logger.error("Execution of the setCurrentLevel method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the setCurrentLevel method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the setCurrentLevel method was canceled!");
     }
   },
   dtd_getLogLevel: function () {
@@ -272,8 +302,12 @@ var DevToDev = {
       stringToUTF8(result, buffer, bufferSize);
       return buffer;
     } catch (e) {
-      _logger.error("In the getLogLevel method error has occurred: " + e);
-      _logger.error("Execution of the getLogLevel method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the getLogLevel method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the getLogLevel method was canceled!");
       return null;
     }
   },
@@ -281,20 +315,26 @@ var DevToDev = {
     try {
       window.devtodev.logLevel = UTF8ToString(logLevel);
     } catch (e) {
-      _logger.error("In the setLogLevel method error has occurred: " + e);
-      _logger.error("Execution of the setLogLevel method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the setLogLevel method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the setLogLevel method was canceled!");
     }
   },
   dtd_getTrackingAvailability: function () {
     try {
       return window.devtodev.getTrackingAvailability();
     } catch (e) {
-      _logger.error(
-        "In the getTrackingAvailability method error has occurred: " + e
-      );
-      _logger.error(
-        "Execution of the getTrackingAvailability method was canceled!"
-      );
+      window.devtodev
+        .getLoggerInstance()
+        .error(
+          "In the getTrackingAvailability method error has occurred: " + e
+        );
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the getTrackingAvailability method was canceled!");
       return true;
     }
   },
@@ -302,12 +342,14 @@ var DevToDev = {
     try {
       window.devtodev.setTrackingAvailability(!!value);
     } catch (e) {
-      _logger.error(
-        "In the setTrackingAvailability method error has occurred: " + e
-      );
-      _logger.error(
-        "Execution of the setTrackingAvailability method was canceled!"
-      );
+      window.devtodev
+        .getLoggerInstance()
+        .error(
+          "In the setTrackingAvailability method error has occurred: " + e
+        );
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the setTrackingAvailability method was canceled!");
     }
   },
   dtd_referrer: function (value) {
@@ -318,8 +360,12 @@ var DevToDev = {
       var utm = JSON.parse(UTF8ToString(value));
       window.devtodev.referrer(utm);
     } catch (e) {
-      _logger.error("In the referrer method error has occurred: " + e);
-      _logger.error("Execution of the referrer method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the referrer method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the referrer method was canceled!");
     }
   },
   dtd_virtualCurrencyPayment: function (
@@ -343,12 +389,12 @@ var DevToDev = {
         data
       );
     } catch (e) {
-      _logger.error(
-        "In the virtualCurrencyPayment method error has occurred: " + e
-      );
-      _logger.error(
-        "Execution of the virtualCurrencyPayment method was canceled!"
-      );
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the virtualCurrencyPayment method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the virtualCurrencyPayment method was canceled!");
     }
   },
   dtd_currencyAccrual: function (
@@ -365,8 +411,12 @@ var DevToDev = {
         accrualType
       );
     } catch (e) {
-      _logger.error("In the currencyAccrual method error has occurred: " + e);
-      _logger.error("Execution of the currencyAccrual method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the currencyAccrual method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the currencyAccrual method was canceled!");
     }
   },
   dtd_realCurrencyPayment: function (orderId, price, productId, currencyCode) {
@@ -378,12 +428,12 @@ var DevToDev = {
         UTF8ToString(currencyCode)
       );
     } catch (e) {
-      _logger.error(
-        "In the realCurrencyPayment method error has occurred: " + e
-      );
-      _logger.error(
-        "Execution of the realCurrencyPayment method was canceled!"
-      );
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the realCurrencyPayment method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the realCurrencyPayment method was canceled!");
     }
   },
   dtd_tutorial: function (step) {
@@ -393,12 +443,12 @@ var DevToDev = {
     try {
       window.devtodev.socialNetworkConnect(UTF8ToString(name));
     } catch (e) {
-      _logger.error(
-        "In the socialNetworkConnect method error has occurred: " + e
-      );
-      _logger.error(
-        "Execution of the socialNetworkConnect method was canceled!"
-      );
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the socialNetworkConnect method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the socialNetworkConnect method was canceled!");
     }
   },
   dtd_socialNetworkPost: function (name, reason) {
@@ -408,8 +458,12 @@ var DevToDev = {
         UTF8ToString(reason)
       );
     } catch (e) {
-      _logger.error("In the socialNetworkPost method error has occurred: " + e);
-      _logger.error("Execution of the socialNetworkPost method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the socialNetworkPost method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the socialNetworkPost method was canceled!");
     }
   },
   dtd_sendBufferedEvents: function () {
@@ -430,12 +484,12 @@ var DevToDev = {
         validatedObject["difficulty"] = json["difficulty"];
       window.devtodev.startProgressionEvent(UTF8ToString(val), validatedObject);
     } catch (e) {
-      _logger.error(
-        "In the startProgressionEvent method error has occurred: " + e
-      );
-      _logger.error(
-        "Execution of the startProgressionEvent method was canceled!"
-      );
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the startProgressionEvent method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the startProgressionEvent method was canceled!");
     }
   },
   dtd_finishProgressionEvent: function (val, valJSON) {
@@ -460,12 +514,12 @@ var DevToDev = {
         validatedObject
       );
     } catch (e) {
-      _logger.error(
-        "In the finishProgressionEvent method error has occurred: " + e
-      );
-      _logger.error(
-        "Execution of the finishProgressionEvent method was canceled!"
-      );
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the finishProgressionEvent method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the finishProgressionEvent method was canceled!");
     }
   },
   dtd_customEvent: function (name, params) {
@@ -477,13 +531,17 @@ var DevToDev = {
       var customParams = JSON.parse(UTF8ToString(params));
       window.devtodev.customEvent(UTF8ToString(name), customParams);
     } catch (e) {
-      _logger.error(
-        "In the customEvent method error has occurred: for key " +
-          UTF8ToString(name) +
-          ":" +
-          e
-      );
-      _logger.error("Execution of the customEvent method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error(
+          "In the customEvent method error has occurred: for key " +
+            UTF8ToString(name) +
+            ":" +
+            e
+        );
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the customEvent method was canceled!");
     }
   },
   dtd_replaceUserId: function (previousUserId, userId) {
@@ -493,16 +551,24 @@ var DevToDev = {
         UTF8ToString(userId)
       );
     } catch (e) {
-      _logger.error("In the replaceUserId method error has occurred: " + e);
-      _logger.error("Execution of the replaceUserId method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the replaceUserId method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the replaceUserId method was canceled!");
     }
   },
   dtd_levelUp: function (level) {
     try {
       window.devtodev.levelUp(level);
     } catch (e) {
-      _logger.error("In the levelUp method error has occurred: " + e);
-      _logger.error("Execution of the levelUp method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the levelUp method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the levelUp method was canceled!");
     }
   },
   dtd_levelUpWithResources: function (
@@ -519,8 +585,12 @@ var DevToDev = {
       var bought = JSON.parse(UTF8ToString(jsonBought));
       window.devtodev.levelUp(level, balance, spent, earned, bought);
     } catch (e) {
-      _logger.error("In the levelUp method error has occurred: " + e);
-      _logger.error("Execution of the levelUp method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the levelUp method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the levelUp method was canceled!");
     }
   },
   dtd_currentBalance: function (jsonString) {
@@ -533,8 +603,12 @@ var DevToDev = {
       var balance = JSON.parse(convertedJson);
       window.devtodev.currentBalance(balance);
     } catch (e) {
-      _logger.error("In the currentBalance method error has occurred: " + e);
-      _logger.error("Execution of the currentBalance method was canceled!");
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the currentBalance method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the currentBalance method was canceled!");
     }
   },
   dtd_setTestProxyUrl: function (url) {
@@ -563,4 +637,15 @@ var DevToDev = {
     window.devtodev.testLogs();
   },
 };
+
+// Add dependencies for functions that use dtd_sendMessage
+DevToDev.dtd_initializeWithRemoteConfig__deps = [
+  "$dtd_sendMessage",
+  "$dtd_getUnityInstance",
+];
+DevToDev.dtd_initializeWithRemoteConfigWithConfig__deps = [
+  "$dtd_sendMessage",
+  "$dtd_getUnityInstance",
+];
+
 mergeInto(LibraryManager.library, DevToDev);

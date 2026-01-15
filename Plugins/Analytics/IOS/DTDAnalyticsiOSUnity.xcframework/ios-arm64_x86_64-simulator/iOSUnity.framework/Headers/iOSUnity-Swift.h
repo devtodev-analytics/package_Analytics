@@ -508,9 +508,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (void)adImpressionWithNetwork:(NSString * _Nonnull)network revenue:(double)revenue placement:(NSString * _Nullable)placement unit:(NSString * _Nullable)unit;
 @end
 
+@protocol UserCountingListener;
+
+@interface DTDAnalytics (SWIFT_EXTENSION(iOSUnity))
++ (void)setUserCountingListener:(id <UserCountingListener> _Nonnull)listener;
+@end
+
 
 @interface DTDAnalytics (SWIFT_EXTENSION(iOSUnity))
 + (void)testLogs;
++ (NSString * _Nullable)getActiveUserIdInternal SWIFT_WARN_UNUSED_RESULT;
++ (NSDictionary<NSString *, NSNumber *> * _Nullable)getUsersDataInternal SWIFT_WARN_UNUSED_RESULT;
++ (BOOL)getCountingFlagInternal SWIFT_WARN_UNUSED_RESULT;
++ (NSDictionary<NSString *, NSDictionary *> * _Nullable)getRemoteConfigInternal SWIFT_WARN_UNUSED_RESULT;
 + (void)setTestProxyUrlWithUrl:(NSString * _Nonnull)url;
 + (void)getTestProxyUrlWithUrlHandler:(void (^ _Nonnull)(NSString * _Nonnull))urlHandler;
 + (void)setTestCustomUrlWithUrl:(NSString * _Nonnull)url;
@@ -520,6 +530,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) void (^ _Nullable logger
 + (void)setLoggerMessageClosure:(void (^ _Nullable)(NSString * _Nonnull))newValue;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull sdkFolderPath;)
 + (NSString * _Nonnull)sdkFolderPath SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull remotesFolderPath;)
++ (NSString * _Nonnull)remotesFolderPath SWIFT_WARN_UNUSED_RESULT;
 + (void)destroySDK;
 + (void)clearKeychain;
 @end
@@ -705,10 +717,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DTDReferralP
 SWIFT_CLASS("_TtC8iOSUnity15DTDRemoteConfig")
 @interface DTDRemoteConfig : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-/// AB test configuration wait time. Default 0.0 (Unlimited)
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) double remoteConfigWaiting;)
-+ (double)remoteConfigWaiting SWIFT_WARN_UNUSED_RESULT;
-+ (void)setRemoteConfigWaiting:(double)newValue;
 /// Experiment group waiting time. Default 10.0
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) double groupDefinitionWaiting;)
 + (double)groupDefinitionWaiting SWIFT_WARN_UNUSED_RESULT;
@@ -726,6 +734,23 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DTDRemoteCon
 + (void)cacheTestExperiment;
 /// Reset configuration, cancel experiment
 + (void)resetConfig;
++ (void)invalidateActiveConfig;
+@end
+
+enum DTDRemoteConfigSource : NSInteger;
+
+SWIFT_CLASS("_TtC8iOSUnity24DTDRemoteConfigChangeKey")
+@interface DTDRemoteConfigChangeKey : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull key;
+@property (nonatomic, readonly) enum DTDRemoteConfigSource source;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface DTDRemoteConfigChangeKey (SWIFT_EXTENSION(iOSUnity))
+/// String description of source
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
 
 /// Result of a configuration change
@@ -744,60 +769,43 @@ SWIFT_CLASS("_TtC8iOSUnity25DTDRemoteConfigCollection")
 /// Check if current configuration have value for a key
 - (BOOL)hasKey:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (DTDRemoteConfigValue * _Nonnull)objectForKeyedSubscript:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
-- (void)setObject:(DTDRemoteConfigValue * _Nonnull)newValue forKeyedSubscript:(NSString * _Nonnull)key;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-@interface DTDRemoteConfigCollection (SWIFT_EXTENSION(iOSUnity))
-- (NSDictionary<NSString *, DTDRemoteConfigValue *> * _Nonnull)getRawConfig SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-enum DTDRemoteConfigReceiveResult : NSInteger;
+@class DTDRemoteConfigUpdate;
 
 /// A listener for working with configuration
 SWIFT_PROTOCOL("_TtP8iOSUnity23DTDRemoteConfigListener_")
 @protocol DTDRemoteConfigListener
-/// The method is called when the configuration has been received
-/// <ul>
-///   <li>
-///     Parameters:
-///   </li>
-///   <li>
-///     result: The result of receiving the configuration
-///   </li>
-/// </ul>
-- (void)onReceivedResult:(enum DTDRemoteConfigReceiveResult)result;
-/// The method is called when the configuration might change
-- (void)onPrepareToChange;
 /// The method is called when there was a change in the remote configuration
 /// \param result Result of a configuration change
 ///
 /// \param error Informing error
 ///
-- (void)onChangedResult:(enum DTDRemoteConfigChangeResult)result error:(NSError * _Nullable)error;
+- (void)onChangedResult:(DTDRemoteConfigUpdate * _Nonnull)update;
 @end
-
-typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigReceiveResult, open) {
-/// An error occurred while receiving the configuration
-  DTDRemoteConfigReceiveResultFailure = 0,
-/// The configuration has been successfully receiving
-  DTDRemoteConfigReceiveResultSuccess = 1,
-/// The configuration has been successfully receiving, but experimnets list is empty
-  DTDRemoteConfigReceiveResultEmpty = 2,
-};
 
 /// Source of configuration values
 typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigSource, open) {
 /// Empty value
-  DTDRemoteConfigSourceEmpty = 0,
-/// Remote value
-  DTDRemoteConfigSourceRemote = 1,
+  DTDRemoteConfigSourceUndefined = 0,
 /// Default value
-  DTDRemoteConfigSourceDefaults = 2,
+  DTDRemoteConfigSourceDefaults = 1,
+/// Remote value
+  DTDRemoteConfigSourceRemote = 2,
+/// AbTest value
+  DTDRemoteConfigSourceAbTest = 3,
 };
+
+
+SWIFT_CLASS("_TtC8iOSUnity21DTDRemoteConfigUpdate")
+@interface DTDRemoteConfigUpdate : NSObject
+@property (nonatomic, readonly, copy) NSArray<DTDRemoteConfigChangeKey *> * _Nonnull keys;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 /// Wrapper for remote parameter values, with methods to get parameter values as different types.
@@ -962,6 +970,13 @@ SWIFT_CLASS("_TtC8iOSUnity17DTDVerifyResponse")
 
 
 
+
+
+SWIFT_PROTOCOL("_TtP8iOSUnity20UserCountingListener_")
+@protocol UserCountingListener
+/// For recive devtodev Id
+- (void)onChangedWithUserCounting:(BOOL)userCounting;
+@end
 
 #endif
 #if __has_attribute(external_source_symbol)
@@ -1481,9 +1496,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (void)adImpressionWithNetwork:(NSString * _Nonnull)network revenue:(double)revenue placement:(NSString * _Nullable)placement unit:(NSString * _Nullable)unit;
 @end
 
+@protocol UserCountingListener;
+
+@interface DTDAnalytics (SWIFT_EXTENSION(iOSUnity))
++ (void)setUserCountingListener:(id <UserCountingListener> _Nonnull)listener;
+@end
+
 
 @interface DTDAnalytics (SWIFT_EXTENSION(iOSUnity))
 + (void)testLogs;
++ (NSString * _Nullable)getActiveUserIdInternal SWIFT_WARN_UNUSED_RESULT;
++ (NSDictionary<NSString *, NSNumber *> * _Nullable)getUsersDataInternal SWIFT_WARN_UNUSED_RESULT;
++ (BOOL)getCountingFlagInternal SWIFT_WARN_UNUSED_RESULT;
++ (NSDictionary<NSString *, NSDictionary *> * _Nullable)getRemoteConfigInternal SWIFT_WARN_UNUSED_RESULT;
 + (void)setTestProxyUrlWithUrl:(NSString * _Nonnull)url;
 + (void)getTestProxyUrlWithUrlHandler:(void (^ _Nonnull)(NSString * _Nonnull))urlHandler;
 + (void)setTestCustomUrlWithUrl:(NSString * _Nonnull)url;
@@ -1493,6 +1518,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) void (^ _Nullable logger
 + (void)setLoggerMessageClosure:(void (^ _Nullable)(NSString * _Nonnull))newValue;
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull sdkFolderPath;)
 + (NSString * _Nonnull)sdkFolderPath SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull remotesFolderPath;)
++ (NSString * _Nonnull)remotesFolderPath SWIFT_WARN_UNUSED_RESULT;
 + (void)destroySDK;
 + (void)clearKeychain;
 @end
@@ -1678,10 +1705,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DTDReferralP
 SWIFT_CLASS("_TtC8iOSUnity15DTDRemoteConfig")
 @interface DTDRemoteConfig : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-/// AB test configuration wait time. Default 0.0 (Unlimited)
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class) double remoteConfigWaiting;)
-+ (double)remoteConfigWaiting SWIFT_WARN_UNUSED_RESULT;
-+ (void)setRemoteConfigWaiting:(double)newValue;
 /// Experiment group waiting time. Default 10.0
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) double groupDefinitionWaiting;)
 + (double)groupDefinitionWaiting SWIFT_WARN_UNUSED_RESULT;
@@ -1699,6 +1722,23 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DTDRemoteCon
 + (void)cacheTestExperiment;
 /// Reset configuration, cancel experiment
 + (void)resetConfig;
++ (void)invalidateActiveConfig;
+@end
+
+enum DTDRemoteConfigSource : NSInteger;
+
+SWIFT_CLASS("_TtC8iOSUnity24DTDRemoteConfigChangeKey")
+@interface DTDRemoteConfigChangeKey : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull key;
+@property (nonatomic, readonly) enum DTDRemoteConfigSource source;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface DTDRemoteConfigChangeKey (SWIFT_EXTENSION(iOSUnity))
+/// String description of source
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
 
 /// Result of a configuration change
@@ -1717,60 +1757,43 @@ SWIFT_CLASS("_TtC8iOSUnity25DTDRemoteConfigCollection")
 /// Check if current configuration have value for a key
 - (BOOL)hasKey:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
 - (DTDRemoteConfigValue * _Nonnull)objectForKeyedSubscript:(NSString * _Nonnull)key SWIFT_WARN_UNUSED_RESULT;
-- (void)setObject:(DTDRemoteConfigValue * _Nonnull)newValue forKeyedSubscript:(NSString * _Nonnull)key;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-@interface DTDRemoteConfigCollection (SWIFT_EXTENSION(iOSUnity))
-- (NSDictionary<NSString *, DTDRemoteConfigValue *> * _Nonnull)getRawConfig SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-enum DTDRemoteConfigReceiveResult : NSInteger;
+@class DTDRemoteConfigUpdate;
 
 /// A listener for working with configuration
 SWIFT_PROTOCOL("_TtP8iOSUnity23DTDRemoteConfigListener_")
 @protocol DTDRemoteConfigListener
-/// The method is called when the configuration has been received
-/// <ul>
-///   <li>
-///     Parameters:
-///   </li>
-///   <li>
-///     result: The result of receiving the configuration
-///   </li>
-/// </ul>
-- (void)onReceivedResult:(enum DTDRemoteConfigReceiveResult)result;
-/// The method is called when the configuration might change
-- (void)onPrepareToChange;
 /// The method is called when there was a change in the remote configuration
 /// \param result Result of a configuration change
 ///
 /// \param error Informing error
 ///
-- (void)onChangedResult:(enum DTDRemoteConfigChangeResult)result error:(NSError * _Nullable)error;
+- (void)onChangedResult:(DTDRemoteConfigUpdate * _Nonnull)update;
 @end
-
-typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigReceiveResult, open) {
-/// An error occurred while receiving the configuration
-  DTDRemoteConfigReceiveResultFailure = 0,
-/// The configuration has been successfully receiving
-  DTDRemoteConfigReceiveResultSuccess = 1,
-/// The configuration has been successfully receiving, but experimnets list is empty
-  DTDRemoteConfigReceiveResultEmpty = 2,
-};
 
 /// Source of configuration values
 typedef SWIFT_ENUM(NSInteger, DTDRemoteConfigSource, open) {
 /// Empty value
-  DTDRemoteConfigSourceEmpty = 0,
-/// Remote value
-  DTDRemoteConfigSourceRemote = 1,
+  DTDRemoteConfigSourceUndefined = 0,
 /// Default value
-  DTDRemoteConfigSourceDefaults = 2,
+  DTDRemoteConfigSourceDefaults = 1,
+/// Remote value
+  DTDRemoteConfigSourceRemote = 2,
+/// AbTest value
+  DTDRemoteConfigSourceAbTest = 3,
 };
+
+
+SWIFT_CLASS("_TtC8iOSUnity21DTDRemoteConfigUpdate")
+@interface DTDRemoteConfigUpdate : NSObject
+@property (nonatomic, readonly, copy) NSArray<DTDRemoteConfigChangeKey *> * _Nonnull keys;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 /// Wrapper for remote parameter values, with methods to get parameter values as different types.
@@ -1935,6 +1958,13 @@ SWIFT_CLASS("_TtC8iOSUnity17DTDVerifyResponse")
 
 
 
+
+
+SWIFT_PROTOCOL("_TtP8iOSUnity20UserCountingListener_")
+@protocol UserCountingListener
+/// For recive devtodev Id
+- (void)onChangedWithUserCounting:(BOOL)userCounting;
+@end
 
 #endif
 #if __has_attribute(external_source_symbol)
