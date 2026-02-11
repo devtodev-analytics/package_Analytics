@@ -1,8 +1,7 @@
-﻿#if UNITY_IOS
+#if UNITY_IOS
 using System;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
@@ -16,7 +15,7 @@ namespace DevToDev.Analytics.Editor
         private const string UNITY_ANALYTICS_NAME = "DTDAnalyticsiOSUnity.xcframework";
         private const string PACKAGE_NAME = "com.devtodev.sdk.analytics";
 
-        [PostProcessBuild(98)]
+        [PostProcessBuild(998)]
         public static void OnPostProcessBuild(BuildTarget target, string pathToBuiltProject)
         {
             if (target == BuildTarget.iOS)
@@ -55,30 +54,34 @@ namespace DevToDev.Analytics.Editor
             }
 
             AddAnalyticsFramework(pathToBuiltProject, project, targetGuid, frameworkAbsolutePath);
+            RemoveAllMetaFilesFromBuild(pathToBuiltProject);
             File.WriteAllText(projectPath, project.WriteToString());
         }
+
+        private static bool IsFrameworkPresentInBuild(string pathToBuiltProject, string frameworkName)
+        {
+            var knownPath = Path.Combine(pathToBuiltProject, "Frameworks", frameworkName);
+            if (Directory.Exists(knownPath))
+                return true;
+            if (!Directory.Exists(pathToBuiltProject))
+                return false;
+            foreach (var dir in Directory.EnumerateDirectories(pathToBuiltProject, "*", SearchOption.AllDirectories))
+            {
+                if (Path.GetFileName(dir) == frameworkName)
+                    return true;
+            }
+            return false;
+        }
+
 
         private static void AddAnalyticsFramework(string projectPath, UnityEditor.iOS.Xcode.PBXProject project,
             string targetGuid,
             string frameworkPath)
         {
-            bool xcFrameworkSupported;
-            try
-            {
-                var version = GetVersion(Application.unityVersion);
-                xcFrameworkSupported = IsXcFrameworkSupported(version[0], version[1], version[2]);
-            }
-            catch (Exception)
-            {
-
-                xcFrameworkSupported = false;
-            }
-            if (!xcFrameworkSupported)
+            if (!IsFrameworkPresentInBuild(projectPath, UNITY_ANALYTICS_NAME))
             {
                 var destinationFrameworkFilePath = Path.Combine(projectPath, "Frameworks", UNITY_ANALYTICS_NAME);
-                // Copy framework
                 DirectoryCopy(frameworkPath, destinationFrameworkFilePath, true);
-                // Add declaration to .xcodeproj.
                 var fileInBuild =
                     project.AddFile($"Frameworks/{UNITY_ANALYTICS_NAME}", $"Frameworks/{UNITY_ANALYTICS_NAME}");
                 string targetBuildPhaseGuid = project.AddFrameworksBuildPhase(targetGuid);
@@ -117,6 +120,50 @@ namespace DevToDev.Analytics.Editor
         }
 
         /// <summary>
+        /// Removes .meta files only from our xcframework in the build output. Other frameworks are not touched.
+        /// Prevents App Store verification failures caused by Unity meta files inside the framework.
+        /// </summary>
+        private static void RemoveAllMetaFilesFromBuild(string pathToBuiltProject)
+        {
+            try
+            {
+                var knownXcFrameworkPath = Path.Combine(pathToBuiltProject, "Frameworks", UNITY_ANALYTICS_NAME);
+                RemoveMetaFilesInDirectory(knownXcFrameworkPath);
+
+                if (Directory.Exists(pathToBuiltProject))
+                {
+                    foreach (var dir in Directory.EnumerateDirectories(pathToBuiltProject, "*", SearchOption.AllDirectories))
+                    {
+                        if (Path.GetFileName(dir) == UNITY_ANALYTICS_NAME)
+                            RemoveMetaFilesInDirectory(dir);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[DevToDev Analytics] Failed to remove .meta files from build: {e.Message}");
+            }
+        }
+
+        private static void RemoveMetaFilesInDirectory(string directoryPath)
+        {
+            if (!Directory.Exists(directoryPath))
+                return;
+
+            foreach (var file in Directory.EnumerateFiles(directoryPath, "*.meta", SearchOption.AllDirectories))
+            {
+                try
+                {
+                    File.Delete(file);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning($"[DevToDev Analytics] Failed to delete .meta file {file}: {e.Message}");
+                }
+            }
+        }
+
+        /// <summary>
         /// Recursively directory copy.
         /// </summary>
         /// <param name="sourceDirName">Source dit path.</param>
@@ -134,8 +181,8 @@ namespace DevToDev.Analytics.Editor
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
             if (!dir.Exists)
             {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: {sourceDirName}");
+                Debug.LogWarning($"[DevToDev Analytics] Source directory does not exist or could not be found: {sourceDirName}");
+                return;
             }
 
             // Delete destination directory if exist.
@@ -179,39 +226,6 @@ namespace DevToDev.Analytics.Editor
                     DirectoryCopy(subdir.FullName, tempPath, copySubDirs, specificExtensions);
                 }
             }
-        }
-        private static int[] GetVersion(string version)
-        {
-            var match = Regex.Match(version, @"^(\d+)\.(\d+)\.(\d+)([a-z]?)(\d*)$", RegexOptions.IgnoreCase);
-            int major, minor, patch;
-            if (match.Success)
-            {
-                major = int.Parse(match.Groups[1].Value);
-                minor = int.Parse(match.Groups[2].Value);
-                patch = int.Parse(match.Groups[3].Value);
-            }
-            else
-            {
-                string cleanedVersion = Regex.Replace(Application.unityVersion, "[^0-9.]", "");
-                major = int.Parse(cleanedVersion.Split('.')[0]);
-                minor = int.Parse(cleanedVersion.Split('.')[1]);
-                patch = int.Parse(cleanedVersion.Split('.')[2]);
-            }
-
-            return new int[] { major, minor, patch };
-        }
-
-        private static bool IsXcFrameworkSupported(int major, int minor, int patch)
-        {
-            switch (major)
-            {
-                case 6000: return true;
-                case 2021: return (minor >= 3 && patch >= 37);
-                case 2022: return (minor >= 3 && patch >= 23);
-                case 2023: return (minor >= 2 && patch >= 18);
-            }
-
-            return false;
         }
     }
 }

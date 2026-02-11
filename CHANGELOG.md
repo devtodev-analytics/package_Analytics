@@ -1,3 +1,13 @@
+## [3.10.2] - 2026-02-11
+
+- Added logic to prevent the Unity Editor from adding .meta files to the xcframework
+- Fixed an undefined symbol error for macOS & iOS platforms
+- Fixed initialization logic without Remote configs
+
+## [3.10.1] - 2026-01-20
+
+- Hotfix: Fixed Subscriptions module for IAPv5
+
 ## [3.10.0] - 2026-01-14
 
 - Added Remote configs for Android, IOS and WebGL platforms
