@@ -1,3 +1,8 @@
+## [3.10.3] - 2026-03-17
+
+- Fixed WebGL platform: missing methods.
+- Fixed WebGL platform: excessive logging of "WARNING [Remote Config] Involved experiment X was cancelled. Reason: time is over".
+
 ## [3.10.2] - 2026-02-11
 
 - Added logic to prevent the Unity Editor from adding .meta files to the xcframework
