@@ -31,7 +31,11 @@ var DevToDev = {
   },
   dtd_initialize: function (appKey) {
     try {
-      window.devtodev.initialize(UTF8ToString(appKey), {});
+      var initArgs = {};
+      if (Array.isArray(window.devtodev.fallbackProxyUrls)) {
+        initArgs.fallbackProxyUrls = window.devtodev.fallbackProxyUrls;
+      }
+      window.devtodev.initialize(UTF8ToString(appKey), initArgs);
     } catch (e) {
       window.devtodev
         .getLoggerInstance()
@@ -64,7 +68,9 @@ var DevToDev = {
           args["trackingAvailability"] = false;
         }
       }
-
+      if (Array.isArray(window.devtodev.fallbackProxyUrls)) {
+        args.fallbackProxyUrls = window.devtodev.fallbackProxyUrls;
+      }
       window.devtodev.initialize(UTF8ToString(appKey), args);
     } catch (e) {
       window.devtodev
@@ -104,6 +110,9 @@ var DevToDev = {
           dtd_sendMessage("OnChangedCallback", JSON.stringify(result));
         },
       };
+      if (Array.isArray(window.devtodev.fallbackProxyUrls)) {
+        args.fallbackProxyUrls = window.devtodev.fallbackProxyUrls;
+      }
       window.devtodev.initializeWithRemoteConfig(
         UTF8ToString(appKey),
         args,
@@ -129,9 +138,13 @@ var DevToDev = {
         },
       };
 
+      var remoteInitArgs = {};
+      if (Array.isArray(window.devtodev.fallbackProxyUrls)) {
+        remoteInitArgs.fallbackProxyUrls = window.devtodev.fallbackProxyUrls;
+      }
       window.devtodev.initializeWithRemoteConfig(
         UTF8ToString(appKey),
-        {},
+        remoteInitArgs,
         {},
         unity
       );
@@ -632,6 +645,22 @@ var DevToDev = {
     var bufferSize = lengthBytesUTF8(result) + 1;
     stringToUTF8(result, buffer, bufferSize);
     return buffer;
+  },
+  dtd_setFallbackProxyUrls: function (urls) {
+    try {
+      var fallbackProxyUrls = JSON.parse(UTF8ToString(urls));
+      window.devtodev.fallbackProxyUrls = fallbackProxyUrls;
+      if (typeof window.devtodev.setFallbackProxyUrls === "function") {
+        window.devtodev.setFallbackProxyUrls(fallbackProxyUrls);
+      }
+    } catch (e) {
+      window.devtodev
+        .getLoggerInstance()
+        .error("In the setFallbackProxyUrls method error has occurred: " + e);
+      window.devtodev
+        .getLoggerInstance()
+        .error("Execution of the setFallbackProxyUrls method was canceled!");
+    }
   },
   dtd_testLogs: function () {
     window.devtodev.testLogs();

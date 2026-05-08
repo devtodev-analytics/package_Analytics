@@ -330,6 +330,9 @@ SWIFT_CLASS("_TtC8iOSUnity12DTDAnalytics")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (enum DTDLogLevel)logLevel SWIFT_WARN_UNUSED_RESULT;
 + (void)setLogLevel:(enum DTDLogLevel)newValue;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSArray<NSString *> * _Nonnull fallbackProxyUrls;)
++ (NSArray<NSString *> * _Nonnull)fallbackProxyUrls SWIFT_WARN_UNUSED_RESULT;
++ (void)setFallbackProxyUrls:(NSArray<NSString *> * _Nonnull)newValue;
 /// Enable COPPA (Children’s Online Privacy Protection Act) compliant for the application.
 + (void)coppaControlEnable;
 /// Get current device identifier
@@ -1318,6 +1321,9 @@ SWIFT_CLASS("_TtC8iOSUnity12DTDAnalytics")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (enum DTDLogLevel)logLevel SWIFT_WARN_UNUSED_RESULT;
 + (void)setLogLevel:(enum DTDLogLevel)newValue;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSArray<NSString *> * _Nonnull fallbackProxyUrls;)
++ (NSArray<NSString *> * _Nonnull)fallbackProxyUrls SWIFT_WARN_UNUSED_RESULT;
++ (void)setFallbackProxyUrls:(NSArray<NSString *> * _Nonnull)newValue;
 /// Enable COPPA (Children’s Online Privacy Protection Act) compliant for the application.
 + (void)coppaControlEnable;
 /// Get current device identifier

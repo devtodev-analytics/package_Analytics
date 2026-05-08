@@ -365,6 +365,10 @@ extension Swift.String {
     @objc get
     @objc set
   }
+  @objc public static var fallbackProxyUrls: [Swift.String] {
+    @objc get
+    @objc set
+  }
   @objc public static func coppaControlEnable()
   @objc(deviceIdHandler:) public static func getDeviceId(completionHandler: @escaping (Swift.String) -> Swift.Void)
   @objc(sdkVersionHandler:) public static func getSDKVersion(completionHandler: @escaping (Swift.String) -> Swift.Void)

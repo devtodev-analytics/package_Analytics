@@ -1,7 +1,10 @@
-## [3.10.3] - 2026-03-17
-
-- Fixed WebGL platform: missing methods.
-- Fixed WebGL platform: excessive logging of "WARNING [Remote Config] Involved experiment X was cancelled. Reason: time is over".
+## [3.11.0] - 2026-05-08
+- Added Remote configs support for Windows and UWP(WSA) platforms
+- Added cross platform projects support for all platforms
+- Added the ability to use the developer's own proxy servers (FallbackProxyUrls) to bypass regional restrictions and ad-blocking systems.
+- Added a limit on the amount of data the SDK can store when sending is not possible.
+- Remote configs: fixed invalidateActiveConfig method behavior.
+- Minor fixes and improvements.
 
 ## [3.10.2] - 2026-02-11
 
