@@ -311,6 +311,7 @@ extension iOSUnity.DTDRemoteConfigChangeResult : Swift.CustomStringConvertible {
 }
 @objc public protocol DTDRemoteConfigListener {
   @objc(onChangedResult:) func onChanged(update: iOSUnity.DTDRemoteConfigUpdate)
+  @objc func onDeleteExperimentConfig()
 }
 @objc public class DTDSocialNetwork : ObjectiveC.NSObject {
   @objc public init(name: Swift.String)
@@ -413,12 +414,18 @@ extension Swift.String {
   @objc public static func adImpression(network: Swift.String, revenue: Swift.Double, placement: Swift.String?, unit: Swift.String?)
   @objc deinit
 }
+@objc @_hasMissingDesignatedInitializers final public class EngineConfig : ObjectiveC.NSObject {
+  @objc final public let config: [Swift.String : Foundation.NSDictionary]?
+  @objc final public let testExperimentConfig: [Swift.String : Foundation.NSDictionary]?
+  @objc deinit
+}
 extension iOSUnity.DTDAnalytics {
   @objc public static func testLogs()
   @objc public static func getActiveUserIdInternal() -> Swift.String?
   @objc public static func getUsersDataInternal() -> [Swift.String : Swift.Int]?
   @objc public static func getCountingFlagInternal() -> Swift.Bool
-  @objc public static func getRemoteConfigInternal() -> [Swift.String : Foundation.NSDictionary]?
+  @objc public static func getRemoteConfigInternal() -> iOSUnity.EngineConfig
+  @objc public static func gettestExperimentConfigInternal() -> [Swift.String : Foundation.NSDictionary]?
   @objc public static func setTestProxyUrl(url: Swift.String)
   @objc public static func getTestProxyUrl(urlHandler: @escaping (Swift.String) -> Swift.Void)
   @objc public static func setTestCustomUrl(url: Swift.String)

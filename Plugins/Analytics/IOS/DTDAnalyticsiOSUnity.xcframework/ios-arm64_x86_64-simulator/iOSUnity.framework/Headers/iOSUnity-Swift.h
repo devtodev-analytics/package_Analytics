@@ -330,6 +330,7 @@ SWIFT_CLASS("_TtC8iOSUnity12DTDAnalytics")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (enum DTDLogLevel)logLevel SWIFT_WARN_UNUSED_RESULT;
 + (void)setLogLevel:(enum DTDLogLevel)newValue;
+/// A list of fallback URLs used when the primary host is unavailable.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSArray<NSString *> * _Nonnull fallbackProxyUrls;)
 + (NSArray<NSString *> * _Nonnull)fallbackProxyUrls SWIFT_WARN_UNUSED_RESULT;
 + (void)setFallbackProxyUrls:(NSArray<NSString *> * _Nonnull)newValue;
@@ -517,13 +518,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSArray<NSString *> * _N
 + (void)setUserCountingListener:(id <UserCountingListener> _Nonnull)listener;
 @end
 
+@class EngineConfig;
 
 @interface DTDAnalytics (SWIFT_EXTENSION(iOSUnity))
 + (void)testLogs;
 + (NSString * _Nullable)getActiveUserIdInternal SWIFT_WARN_UNUSED_RESULT;
 + (NSDictionary<NSString *, NSNumber *> * _Nullable)getUsersDataInternal SWIFT_WARN_UNUSED_RESULT;
 + (BOOL)getCountingFlagInternal SWIFT_WARN_UNUSED_RESULT;
-+ (NSDictionary<NSString *, NSDictionary *> * _Nullable)getRemoteConfigInternal SWIFT_WARN_UNUSED_RESULT;
++ (EngineConfig * _Nonnull)getRemoteConfigInternal SWIFT_WARN_UNUSED_RESULT;
++ (NSDictionary<NSString *, NSDictionary *> * _Nullable)gettestExperimentConfigInternal SWIFT_WARN_UNUSED_RESULT;
 + (void)setTestProxyUrlWithUrl:(NSString * _Nonnull)url;
 + (void)getTestProxyUrlWithUrlHandler:(void (^ _Nonnull)(NSString * _Nonnull))urlHandler;
 + (void)setTestCustomUrlWithUrl:(NSString * _Nonnull)url;
@@ -788,6 +791,7 @@ SWIFT_PROTOCOL("_TtP8iOSUnity23DTDRemoteConfigListener_")
 /// \param error Informing error
 ///
 - (void)onChangedResult:(DTDRemoteConfigUpdate * _Nonnull)update;
+- (void)onDeleteExperimentConfig;
 @end
 
 /// Source of configuration values
@@ -968,6 +972,15 @@ SWIFT_CLASS("_TtC8iOSUnity17DTDVerifyResponse")
 @property (nonatomic, readonly) enum ReceiptStatus receiptStatus;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@end
+
+
+SWIFT_CLASS("_TtC8iOSUnity12EngineConfig")
+@interface EngineConfig : NSObject
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSDictionary *> * _Nullable config;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSDictionary *> * _Nullable testExperimentConfig;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -1321,6 +1334,7 @@ SWIFT_CLASS("_TtC8iOSUnity12DTDAnalytics")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) enum DTDLogLevel logLevel;)
 + (enum DTDLogLevel)logLevel SWIFT_WARN_UNUSED_RESULT;
 + (void)setLogLevel:(enum DTDLogLevel)newValue;
+/// A list of fallback URLs used when the primary host is unavailable.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSArray<NSString *> * _Nonnull fallbackProxyUrls;)
 + (NSArray<NSString *> * _Nonnull)fallbackProxyUrls SWIFT_WARN_UNUSED_RESULT;
 + (void)setFallbackProxyUrls:(NSArray<NSString *> * _Nonnull)newValue;
@@ -1508,13 +1522,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSArray<NSString *> * _N
 + (void)setUserCountingListener:(id <UserCountingListener> _Nonnull)listener;
 @end
 
+@class EngineConfig;
 
 @interface DTDAnalytics (SWIFT_EXTENSION(iOSUnity))
 + (void)testLogs;
 + (NSString * _Nullable)getActiveUserIdInternal SWIFT_WARN_UNUSED_RESULT;
 + (NSDictionary<NSString *, NSNumber *> * _Nullable)getUsersDataInternal SWIFT_WARN_UNUSED_RESULT;
 + (BOOL)getCountingFlagInternal SWIFT_WARN_UNUSED_RESULT;
-+ (NSDictionary<NSString *, NSDictionary *> * _Nullable)getRemoteConfigInternal SWIFT_WARN_UNUSED_RESULT;
++ (EngineConfig * _Nonnull)getRemoteConfigInternal SWIFT_WARN_UNUSED_RESULT;
++ (NSDictionary<NSString *, NSDictionary *> * _Nullable)gettestExperimentConfigInternal SWIFT_WARN_UNUSED_RESULT;
 + (void)setTestProxyUrlWithUrl:(NSString * _Nonnull)url;
 + (void)getTestProxyUrlWithUrlHandler:(void (^ _Nonnull)(NSString * _Nonnull))urlHandler;
 + (void)setTestCustomUrlWithUrl:(NSString * _Nonnull)url;
@@ -1779,6 +1795,7 @@ SWIFT_PROTOCOL("_TtP8iOSUnity23DTDRemoteConfigListener_")
 /// \param error Informing error
 ///
 - (void)onChangedResult:(DTDRemoteConfigUpdate * _Nonnull)update;
+- (void)onDeleteExperimentConfig;
 @end
 
 /// Source of configuration values
@@ -1959,6 +1976,15 @@ SWIFT_CLASS("_TtC8iOSUnity17DTDVerifyResponse")
 @property (nonatomic, readonly) enum ReceiptStatus receiptStatus;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE;
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@end
+
+
+SWIFT_CLASS("_TtC8iOSUnity12EngineConfig")
+@interface EngineConfig : NSObject
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSDictionary *> * _Nullable config;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSDictionary *> * _Nullable testExperimentConfig;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 

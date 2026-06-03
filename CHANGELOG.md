@@ -1,6 +1,11 @@
+## [3.11.1] - 2026-06-03
+
+- Fixed an A/B testing issue that prevented switching groups on a test device.
+- Fixed an issue where, in rare cases, the onChanged callback was not triggered.
+- Fixed an issue where the application version was empty on WebGL platform.
 ## [3.11.0] - 2026-05-08
-- Added Remote configs support for Windows and UWP(WSA) platforms
-- Added cross platform projects support for all platforms
+
+- Added cross platform projects support for all platform
 - Added the ability to use the developer's own proxy servers (FallbackProxyUrls) to bypass regional restrictions and ad-blocking systems.
 - Added a limit on the amount of data the SDK can store when sending is not possible.
 - Remote configs: fixed invalidateActiveConfig method behavior.

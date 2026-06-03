@@ -94,6 +94,7 @@ var DevToDev = {
       args["userId"] = UTF8ToString(userId);
       args["logLevel"] = UTF8ToString(logLevel);
       args["applicationVersion"] = UTF8ToString(applicationVersion);
+
       if (UTF8ToString(currentLevel) != "null") {
         args["currentLevel"] = parseInt(UTF8ToString(currentLevel));
       }
@@ -106,8 +107,10 @@ var DevToDev = {
       }
       var unity = {
         onChanged: function (result) {
-          console.log("Callback result:", JSON.stringify(result, null, 2));
           dtd_sendMessage("OnChangedCallback", JSON.stringify(result));
+        },
+        onDeleteExperimentConfig: function() {
+          dtd_sendMessage("OnDeleteExperimentConfig");
         },
       };
       if (Array.isArray(window.devtodev.fallbackProxyUrls)) {
@@ -130,12 +133,13 @@ var DevToDev = {
   },
   dtd_initializeWithRemoteConfig: function (appKey) {
     try {
-      console.log("dtd_initializeWithRemoteConfig: " + appKey);
       var unity = {
-        onChanged: function (result) {
-          console.log("Callback result:", JSON.stringify(result, null, 2));
+        onChanged: function (result) {å
           dtd_sendMessage("OnChangedCallback", JSON.stringify(result));
         },
+        onDeleteExperimentConfig: function() {
+          dtd_sendMessage("OnDeleteExperimentConfig");
+        }
       };
 
       var remoteInitArgs = {};
@@ -513,7 +517,6 @@ var DevToDev = {
       }
 
       var json = JSON.parse(UTF8ToString(valJSON));
-      console.log(UTF8ToString(valJSON));
       var validatedObject = {};
       validatedObject["successfulCompletion"] = json["successfulCompletion"];
       if (json["duration"] != null && json["duration"] > 0)
