@@ -1,8 +1,11 @@
+## [3.11.2] - 2026-06-12
+- Fixed a bug that caused the onChanged callback to function incorrectly.
+
 ## [3.11.1] - 2026-06-03
 
 - Fixed an A/B testing issue that prevented switching groups on a test device.
 - Fixed an issue where, in rare cases, the onChanged callback was not triggered.
-- Fixed an issue where the application version was empty on WebGL platform.
+
 ## [3.11.0] - 2026-05-08
 
 - Added cross platform projects support for all platform
