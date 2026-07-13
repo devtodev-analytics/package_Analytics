@@ -1,6 +1,6 @@
 Latest Version
 --------------
-##### _ - [v3.11.2](https://github.com/devtodev-analytics/package_Analytics/releases/latest)
+##### _ - [v3.11.3](https://github.com/devtodev-analytics/package_Analytics/releases/latest)
 
 Getting Started
 ---------------

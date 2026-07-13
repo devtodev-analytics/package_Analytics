@@ -1,3 +1,6 @@
+## [3.11.3] - 2026-07-10
+- Fixed a bug causing non-ASCII characters to be unsupported on WebGL platforms.
+
 ## [3.11.2] - 2026-06-12
 - Fixed a bug that caused the onChanged callback to function incorrectly.
 
