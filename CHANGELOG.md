@@ -1,3 +1,8 @@
+## [3.11.4] - 2026-10-22
+- Fixed an issue where a userId containing / character would break config storage.
+- Fixed a bug on WebGL platform when VirtualCurrencyPayment method did not send currency code
+- Fixed a crash on iOS, macOS and Android that could occur when the app was terminating: native SDK callbacks are no longer dispatched to Unity from background threads, and the main-thread dispatcher no longer calls Unity APIs (FindObjectsOfType) during teardown.
+
 ## [3.11.3] - 2026-07-10
 - Fixed a bug causing non-ASCII characters to be unsupported on WebGL platforms.
 
