@@ -1,3 +1,7 @@
+## [3.11.6] - 2026-11-12
+Remote configs:
+- Fix for device disk overflow error
+
 ## [3.11.5] - 2026-11-05
 Remote configs:
 - Fix for device disk overflow error
